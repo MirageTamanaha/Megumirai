@@ -9,7 +9,7 @@ namespace Megumirai.Controllers
     public class CartController : Controller
     {
         // GET: Cart
-        public ActionResult Index()
+        public ActionResult Home()
         {
             return View();
         }
