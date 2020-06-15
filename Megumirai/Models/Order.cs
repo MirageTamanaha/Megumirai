@@ -20,8 +20,8 @@ namespace Megumirai.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int OrderId { get; set; }
-        public int CustomerId { get; set; }
+        public decimal OrderId { get; set; }
+        public decimal CustomerId { get; set; }
         public int SubPrice { get; set; }
         public int Tax { get; set; }
         public int TotalPrice { get; set; }

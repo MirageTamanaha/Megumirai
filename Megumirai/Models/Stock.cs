@@ -14,7 +14,7 @@ namespace Megumirai.Models
     
     public partial class Stock
     {
-        public int ItemId { get; set; }
+        public decimal ItemId { get; set; }
         public int Stock1 { get; set; }
         public Nullable<System.DateTime> ReceiptDate { get; set; }
     

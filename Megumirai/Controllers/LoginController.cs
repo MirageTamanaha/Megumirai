@@ -8,30 +8,29 @@ using Megumirai.Models;
 
 namespace Megumirai.Controllers
 {
-
     public class LoginController : Controller
     {
 
-        
+        private Database1Entities db = new Database1Entities();
 
-       [HttpGet]
+        [AllowAnonymous]
         public ActionResult EmpLoginIndex()
         {
-            return View();
+                  return View();
         }
 
 
         [HttpPost]
-        public ActionResult EmpLoginIndex(EmpLoginModel model)
+        public ActionResult EmpLogin(string id,string password,Employee model)
         {
             using (var db = new Database1Entities())
             {
-                var ul = db.Employees.Find(int.Parse(model.EmployeeId));
-                if (int.Parse(model.EmployeeId)==ul.EmployeeId && model.Password==ul.Password)
+                var ul = db.Employees.Find(int.Parse(id));
+                if (int.Parse(id) == ul.EmployeeId && password == ul.Password)
                 {
                     // ユーザー認証 成功    
-                    FormsAuthentication.SetAuthCookie(model.EmployeeId, model.RememberMe);
-                    return this.Redirect("/Login/EmpMainMenu");
+                    FormsAuthentication.SetAuthCookie(id, model.RememberMe);
+                    return this.Redirect("EmpMainMenu");
                 }
                 else
                 {
@@ -40,23 +39,8 @@ namespace Megumirai.Controllers
                     return this.View(model);
                 }
             }
-           }
-        
-        public ActionResult EmpMainMenu()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return this.Redirect("/");
+
         }
     }
-    }
+}
         
-    
-
-
-
-

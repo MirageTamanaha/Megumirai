@@ -10,8 +10,11 @@
 namespace Megumirai.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Security.Cryptography;
+    using System.Text;
+
     public partial class Employee
     {
         public int EmployeeId { get; set; }
@@ -20,3 +23,4 @@ namespace Megumirai.Models
         public bool RememberMe { get; set; }
     }
 }
+

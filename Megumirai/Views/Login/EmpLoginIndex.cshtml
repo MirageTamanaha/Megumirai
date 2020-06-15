@@ -1,34 +1,22 @@
 ﻿
-@model Megumirai.Models.EmpLoginModel
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-<title>Login</title>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
-</head>
-<body>
-    <header>
-        <h2>ログイン</h2>
-    </header>
-    <article>
-        @Html.ValidationSummary()
-        @using (@Html.BeginForm())
-        {
-            <div>
-                @Html.ValidationMessageFor(model => model.EmployeeId)<br>
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-            <div>
-                <span>社員番号：</span>@Html.TextBoxFor(model => model.EmployeeId)<br>
-                <span>パスワード：</span>@Html.PasswordFor(model => model.Password)<br>
-            </div>
-            <br>
-            <div><input type="submit" value="ログイン" /></div>
-        }
-      
-    </article>
-</body>
-</html>
 
+ 
+<title>Login</title>
+
+<form action="Login/EmpLogin" method="post">
+    <table>
+        <tr>
+            <th>社員番号</th>
+            <td><input type="text"  name="id" /></td>
+        </tr>
+        <tr>
+            <th>パスワード</th>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="ログイン" />
+            <td>
+        </tr>
+    </table>
+    </form>
