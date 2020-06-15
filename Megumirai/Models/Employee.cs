@@ -10,12 +10,17 @@
 namespace Megumirai.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Security.Cryptography;
+    using System.Text;
+
     public partial class Employee
     {
-        public decimal EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public string Password { get; set; }
+        public bool RememberMe { get; set; }
     }
 }
+

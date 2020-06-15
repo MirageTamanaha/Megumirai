@@ -175,7 +175,7 @@
           <Key>
             <PropertyRef Name="EmployeeId" />
           </Key>
-          <Property Name="EmployeeId" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="EmployeeId" Type="Decimal" Nullable="false" />
           <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
