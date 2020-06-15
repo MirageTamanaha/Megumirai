@@ -14,9 +14,9 @@ namespace Megumirai.Models
     
     public partial class OrderDetail
     {
-        public decimal OrderId { get; set; }
-        public decimal OrderDetailId { get; set; }
-        public decimal ItemId { get; set; }
+        public int OrderId { get; set; }
+        public int OrderDetailId { get; set; }
+        public int ItemId { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
         public System.DateTime DeliveryDate { get; set; }

@@ -20,7 +20,7 @@ namespace Megumirai.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public decimal ItemId { get; set; }
+        public int ItemId { get; set; }
         public string ItemName { get; set; }
         public string ItemPhoto { get; set; }
         public string Category { get; set; }
