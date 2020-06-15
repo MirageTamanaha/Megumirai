@@ -1,7 +1,39 @@
-﻿
+﻿@model Megumirai.Models.Item
 @{
-    ViewBag.Title = "CartInput";
+    ViewBag.Title = "商品追加";
 }
 
-<h2>CartInput</h2>
+<h2>商品を買い物かご追加</h2>
+<div>
+    下記の商品を買い物かごに追加します。<br>
+    数量と希望納期を入力してください。
+</div>
 
+<img src="@Model.ItemPhoto">
+
+
+@using (Html.BeginForm("CartCheck", "Cart", FormMethod.Post))
+{
+    <table border="1">
+        <tr>
+            <th>商品番号</th>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>数量</th>
+            <th>希望納期</th>
+        </tr>
+        <tr>
+            <td>@String.Format("{0:D4}", Model.ItemId)</td>
+            <td>@Model.ItemName</td>
+            <td>@String.Format("{0:C}-", Model.UnitPrice)</td>
+            <td><input type="text" name="quantity"></td>
+            <td><input type="text" name="date"></td>
+        </tr>
+    </table>
+    <br>
+    @Html.HiddenFor(model => model.ItemId)
+    @Html.HiddenFor(model => model.ItemName)
+    @Html.HiddenFor(model => model.UnitPrice)
+    @Html.HiddenFor(model => model.ItemPhoto)
+    <input type="submit" value="追加する">
+}
