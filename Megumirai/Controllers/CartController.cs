@@ -10,7 +10,7 @@ namespace Megumirai.Controllers
     public class CartController : Controller
     {
         // GET: Cart
-        public ActionResult CartInput()
+ public ActionResult CartInput()
         {
             using (var db = new Database1Entities())
             {
@@ -36,6 +36,7 @@ namespace Megumirai.Controllers
         }
 
         public ActionResult CartCalc(Cart cart)
+
         {
             return View();
         }
