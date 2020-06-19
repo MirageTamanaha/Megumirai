@@ -14,12 +14,6 @@ namespace Megumirai.Models
     
     public partial class Item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
-        {
-            this.OrderDetails = new HashSet<OrderDetail>();
-        }
-    
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public string ItemPhoto { get; set; }
@@ -27,9 +21,7 @@ namespace Megumirai.Models
         public int UnitPrice { get; set; }
         public string Size { get; set; }
         public string Assortment { get; set; }
-    
-        public virtual Stock Stock { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public int Stock { get; set; }
+        public Nullable<System.DateTime> ReceiptDate { get; set; }
     }
 }

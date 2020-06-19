@@ -22,7 +22,6 @@ namespace Megumirai.Models
         public System.DateTime DeliveryDate { get; set; }
         public string Status { get; set; }
     
-        public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
     }
 }

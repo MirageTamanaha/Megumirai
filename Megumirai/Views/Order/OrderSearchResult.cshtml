@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Megumirai.Models.OrderMix>
+@{
+    ViewBag.Title = "OrderSearchResult";
+}
+
+<title>OrderSearchResult</title>
+
+<center>
+    <h2>受注情報検索</h2>
+    以下の条件で検索を行いました。<br />
+    受注情報ステータスを変更する場合は、検索結果から<br />
+    「ご注文番号ー明細」リンクをクリックしてください。<br />
+    <br />
+    <div>
+        顧客ID @ViewBag.customerId<br>
+    </div>
+    <div>
+        ご注文番号 @ViewBag.orderNo<br>
+    </div>
+    <div>
+        希望納期 @ViewBag.deliveryFrom～@ViewBag.deliveryTo<br>
+    </div>
+    <div>
+        受注日時 @ViewBag.orderFrom～@ViewBag.orderTo<br>
+    </div>
+    <div>
+        ステータス @ViewBag.status<br>
+    </div>
+    <h3>検索</h3>
+    <table border="1">
+        <tr>
+            <th>ご注文番号ー明細</th>
+            <th>商品番号</th>
+            <th>商品名</th>
+            <th>数量</th>
+            <th>希望納期</th>
+            <th>ステータス</th>
+        </tr>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <th>@res.OrderId-@Html.ActionLink("", "OrderUpdateInput", new { orderDetailId = @res.OrderDetailId })</th>
+                <th>@res.ItemId</th>
+                <th>@res.ItemName</th>
+                <th>@res.Quantity</th>
+                <th>@res.DeliveryDate</th>
+                <th>@res.Status</th>
+            </tr>
+        }
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</center>

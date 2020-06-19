@@ -18,6 +18,7 @@ namespace Megumirai.Models
         public Customer()
         {
             this.Orders = new HashSet<Order>();
+            this.OrderMixes = new HashSet<OrderMix>();
         }
     
         public int CustomerId { get; set; }
@@ -32,5 +33,7 @@ namespace Megumirai.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderMix> OrderMixes { get; set; }
     }
 }
