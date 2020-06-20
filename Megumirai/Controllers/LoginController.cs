@@ -24,7 +24,7 @@ namespace Megumirai.Controllers
         [HttpPost]
         public ActionResult EmpLoginIndex(EmpLoginModel model)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ul = db.Employees.Find(int.Parse(model.EmployeeId));
                 if (int.Parse(model.EmployeeId)==ul.EmployeeId && model.Password==ul.Password)

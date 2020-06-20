@@ -12,7 +12,7 @@ namespace Megumirai.Controllers
         // GET: Cart
  public ActionResult CartInput()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var items = db.Items.Find(1);
                 return View(items);

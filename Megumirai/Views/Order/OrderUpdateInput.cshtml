@@ -1,7 +1,49 @@
-﻿
+﻿@model Megumirai.Models.OrderMix
 @{
     ViewBag.Title = "OrderUpdateInput";
 }
+<center>
+    <h2>受注ステータス変更</h2>
 
-<h2>OrderUpdateInput</h2>
+    <br>
+    受注ステータスを変更してください。
+    <br>
+</center>
+<center>
+
+    @Html.ValidationSummary()
+    @using (@Html.BeginForm("OrderUpdateX", "Order", FormMethod.Post))
+    {
+        <table>
+            <tr>
+
+                <th>ご注文番号-明細</th>
+                <th>@Model.OrderId- @Model.OrderDetailId</th>
+                <th>商品番号</th>
+                <th>@Model.ItemId</th>
+                <th>商品名</th>
+                <th>@Model.ItemName</th>
+                <th>数量</th>
+                <th>@Model.Quantity</th>
+                <th>希望納期</th>
+                <th>@Model.DeliveryDate</th>
+                <th>ステータス</th>
+                <th>
+                    <select name=”status”>
+                        <option type="text" value="出荷済み">出荷済み</option>
+                        <option type="text" value="未出荷">未出荷</option>
+                    </select>
+                </th>
+            </tr>
+        </table>
+        <br>
+        @Html.HiddenFor(model=>model.ItemId)
+        @Html.HiddenFor(model=>model.OrderMixId)
+        <div><input type="submit" value="更新"></div>
+        <button type="button" onclick="history.back()">検索結果に戻る</button>
+    }
+
+</center>
+
+
 
