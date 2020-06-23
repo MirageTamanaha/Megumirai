@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - マイ ASP.NET アプリケーション</title>
+    <title>@ViewBag.Title Colorfulverger　商品発注システム</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -30,17 +30,7 @@
         </div>
     </div>
 
-    <div>
-        <h1></h1>メニュー<u></u>
-        <ul>
-            <li>@Html.ActionLink("カタログを見る", "ItemList", "Item", null, null)</li>
-            <li>@Html.ActionLink("見積確認", "CartCalc", "Cart", null, null)</li>
-            <li>@Html.ActionLink("発注ステータス確認", "OrderConfirm", "Order", null, null)</li>
-            <li>@Html.ActionLink("ログアウト", "Logout", "Login")</li>
-
-
-        </ul>
-    </div>
+    
     <div class="container body-content">
         @RenderBody()
         <hr />
