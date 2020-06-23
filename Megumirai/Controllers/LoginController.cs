@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using Megumirai.Models;
 
 namespace Megumirai.Controllers
@@ -41,10 +42,10 @@ namespace Megumirai.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Logout()
+        public ActionResult EmpLogout()
         {
             FormsAuthentication.SignOut();
-            return this.Redirect("/");
+            return View("EmpLoginIndex");
         }
     }
     }
