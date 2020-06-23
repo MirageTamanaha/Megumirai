@@ -26,7 +26,7 @@ namespace Megumirai.Controllers
     public class OrderController : Controller
     {
         // GET: Order
-
+        [Authorize]
         public ActionResult OrderSearch()
         {
             return View();
