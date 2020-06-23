@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Linq.Expressions;
 using Microsoft.Ajax.Utilities;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Megumirai.Controllers
 {
@@ -30,108 +31,94 @@ namespace Megumirai.Controllers
         {
             return View();
         }
-
-        public ActionResult OrderSearchResult(string customerId, string orderNo, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo, string status)
+        public ActionResult OrderSearchResult(OrderMix model, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo, string status)
         {
-            int CsId = int.Parse(customerId);
-            int OrNo = int.Parse(orderNo);
 
             using (var db = new Database1Entities1())
             {
-                var x = from e in db.OrderMixes
-                        where e.CustomerId == CsId
-                         & e.OrderId == OrNo
-                        select new
-                        {
-                            OrderId = e.OrderId,
-                            CustomerId = e.CustomerId,
-                            OrderDetailId = e.OrderDetailId,
-                            ItemId = e.ItemId,
-                            ItemName = e.ItemName,
-                            DeliveryDate = e.DeliveryDate,
-                            Status = e.Status,
-                            Quantity = e.Quantity
-                        };
+
+                var x = db.OrderMixes
+                   .WhereIf(model.OrderId != 0, e => e.OrderId >= model.OrderId)
+                   .WhereIf(model.CustomerId != 0, e => e.CustomerId >= model.CustomerId)
+                   .WhereIf(deliveryTo != null, e => e.DeliveryDate <= deliveryTo)
+                   .WhereIf(deliveryTo != null, e => e.DeliveryDate <= deliveryTo)
+                   .WhereIf(orderFrom != null, e => e.OrderDate >= orderFrom)
+                   .WhereIf(orderFrom != null, e => e.OrderDate >= orderFrom)
+                   .WhereIf(status == "出荷済", e => e.Status == "出荷済")
+                   .WhereIf(status == "未出荷", e => e.Status == "未出荷")
+                   .WhereIf(status == "キャンセル", e => e.Status == "キャンセル")
+                   .WhereIf(status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
+                    .ToList();
+
                 //検索条件を結果に渡す。                                                                    
-                ViewBag.customerId = customerId;
-                ViewBag.orderNo = orderNo;
+                
+                ViewBag.customerId = model.CustomerId;
+                ViewBag.orderNo = model.OrderId;
                 ViewBag.deliveryFrom = deliveryFrom;
                 ViewBag.deliveryTo = deliveryTo;
                 ViewBag.orderFrom = orderFrom;
                 ViewBag.orderTo = orderTo;
                 ViewBag.status = status;
 
-                ViewBag.List = x;
-                return View();
+               
+                Session["Search"] = x;
+
+
+                return View(x);
 
             }
         }
-
-        public ActionResult OrderList()
+        public ActionResult OrderUpdateInput(OrderMix om)
         {
             using (var db = new Database1Entities1())
             {
-                var List = db.OrderMixes.ToList();
-
-                return View(List);
+                var p = db.OrderMixes.Find(om.OrderMixId);
+                Session["Update"] = p;
+                return View(Session["Update"]);
             }
-        }
-
-        public ActionResult OrderUpdateInput(string OrderMixId)
-        {
-            using (var db = new Database1Entities1())
-            {
-                var p = db.OrderMixes.Find(int.Parse(OrderMixId));
-
-                return View(p);
-            }
-        }
-
-        public ActionResult OrderUpdate(OrderMix model, string status)
-        {
-            using (var db = new Database1Entities1())
-            {
-                var p = db.OrderMixes.Find(model.OrderMixId);
-                var q = db.Stocks.Find(model.ItemId);
-                if (p.Status != status)
-                {
-                    if (status == "未出荷")
-                    {
-                        p.Status = status;
-                        q.Stock1 = q.Stock1 + p.Quantity;
-                    }
-                    else if (status == "出荷")
-                    {
-                        p.Status = status;
-                        q.Stock1 = q.Stock1 - p.Quantity;
-                    }
-                }
-                db.SaveChanges();
-                return View("OrderUpdateInput", p);
-            }
-
-
-
         }
         public ActionResult OrderUpdateX(OrderMix model, string status)
         {
             using (var db = new Database1Entities1())
             {
                 var p = db.OrderMixes.Find(model.OrderMixId);
-                var q = db.Stocks.Find(model.ItemId);
-
-
-                //q.Stock1 = q.Stock1 + p.Quantity;
-
-                //db.SaveChanges();
-                return Content(String.Format("{0:D4}",q.ItemId));  
-            //return View("OrderUpdateInput", p);
-            }
+                var q = db.Items.Find(p.ItemId);
+                if (p.Status != status)
+                {
+                    if (status == "未出荷")
+                    {
+                        q.Stock = q.Stock + p.Quantity;
+                        db.SaveChanges();
+                        p.Status = status;
+                        db.SaveChanges();
+                    }
+                    else if (status == "出荷済")
+                    {
+                        if (q.Stock >= p.Quantity)
+                        {
+                            q.Stock = q.Stock - p.Quantity;
+                            db.SaveChanges();
+                            p.Status = status;
+                            db.SaveChanges();
+                        }
+                       else if(q.Stock < p.Quantity)
+                        {
+                         ViewBag.message = "在庫数量が不足しています。";
+                            return View("OrderUpdateInput",Session["Update"]);
+                         }
+                    }
+                }
+                return View("OrderUpdate",p);
+               }
         }
-    }
+        public ActionResult SearchBack() 
+        {
+            var u =  Session["Search"];
+           
+            return View("OrderSearchResult",u);
+        }
+     }
 }
-
-    
 
 
 

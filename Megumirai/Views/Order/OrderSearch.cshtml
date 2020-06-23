@@ -1,4 +1,4 @@
-﻿
+﻿@model Megumirai.Models.OrderMix
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
@@ -13,11 +13,11 @@
         @Html.ValidationSummary()
         @using (@Html.BeginForm("OrderSearchResult", "Order", FormMethod.Post))
         {
+        <div>
+            顧客ID <input id="model.CoustomerId" name="model.CustomerId" type="text" value="0"><br>
+        </div>
             <div>
-                顧客ID<input type="text" name="customerId"><br>
-            </div>
-            <div>
-                ご注文番号<input type="text" name="orderNo"><br>
+                ご注文番号<input id="model.OrderId" name="model.OrderId" type="text" value="0">
             </div>
             <div>
                 希望納期<input type="text" name="deliveryFrom">～<input type="text" name="deliveryTo"><br>
@@ -26,13 +26,14 @@
                 受注日時<input type="text" name="orderFrom">～<input type="text" name="orderTo"><br>
             </div>
             <div>
-                ステータス　
-                <select name=”status”>
-                    <option type="text" name="status">全て</option>
-                    <option type="text" name="status">出荷済み</option>
-                    <option type="text" name=”status”>未出荷</option>
-                    <option type="text" name="status">キャンセル</option>
+                ステータス
+                <select name="status">
+                    <option value="全て">全て</option>
+                    <option value="出荷済">出荷済</option>
+                    <option value="未出荷">未出荷</option>
+                    <option value="キャンセル">キャンセル</option>
                 </select>
+
                 <br>
             </div>
             <div><input type="submit" value="検索"></div>
