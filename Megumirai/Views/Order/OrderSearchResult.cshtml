@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Megumirai.Models.OrderMix>
-@{
-    ViewBag.Title = "OrderSearchResult";
-}
+
 
 <title>OrderSearchResult</title>
 
@@ -39,12 +37,15 @@
         @foreach (var res in Model)
         {
             <tr>
-                <th>@res.OrderId-@Html.ActionLink("", "OrderUpdateInput", new { orderDetailId = @res.OrderDetailId })</th>
-                <th>@res.ItemId</th>
-                <th>@res.ItemName</th>
-                <th>@res.Quantity</th>
-                <th>@res.DeliveryDate</th>
-                <th>@res.Status</th>
+                <td>
+                    @Html.ActionLink(res.OrderId + "-" + res.OrderDetailId,
+          "OrderUpdateInput", new { res.OrderMixId, controller = "Order" })
+                </td>
+                <td>@res.ItemId</td>
+                <td>@res.ItemName</td>
+                <td>@res.Quantity</td>
+                <td>@res.DeliveryDate</td>
+                <td>@res.Status</td>
             </tr>
         }
     </table>

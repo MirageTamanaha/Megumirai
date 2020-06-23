@@ -11,16 +11,11 @@ namespace Megumirai.Controllers
 
     public class LoginController : Controller
     {
-
-        
-
        [HttpGet]
         public ActionResult EmpLoginIndex()
         {
             return View();
         }
-
-
         [HttpPost]
         public ActionResult EmpLoginIndex(EmpLoginModel model)
         {
@@ -41,7 +36,6 @@ namespace Megumirai.Controllers
                 }
             }
            }
-        
         public ActionResult EmpMainMenu()
         {
             return View();
