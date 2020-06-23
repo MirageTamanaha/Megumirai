@@ -16,6 +16,7 @@
         @Html.ValidationSummary()
         @using (@Html.BeginForm())
         {
+            @Html.AntiForgeryToken()
             <div>
                 @Html.ValidationMessageFor(model => model.EmployeeId)<br>
                 @Html.ValidationMessageFor(model => model.Password)
@@ -30,7 +31,7 @@
                     <td>@Html.PasswordFor(model => model.Password)</td>
                 </tr>
                     </table>
-            <div><input type="submit" value="ログイン" /></div>
+            <div><input type="submit" value="ログイン" /><input type="reset" value="クリア" /></div>
         }
       
     </article>

@@ -1,7 +1,40 @@
 ﻿
-@{
-    ViewBag.Title = "CsLogin";
-}
+@model Megumirai.Models.CsLoginModel
 
-<h2>CsLogin</h2>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<!DOCTYPE html>
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+
+    <article>
+        @Html.ValidationSummary()
+        @using (@Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationMessageFor(model => model.CustomerId)<br>
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <div>
+
+            <p>顧客IDとパスワードを入力してください。</p>
+            <span>顧客ID：</span>@Html.TextBoxFor(model => model.CustomerId)<br>
+            <span>パスワード：</span>@Html.PasswordFor(model => model.Password)<br>
+        </div>
+        <br>
+        <div><input type="submit" value="ログイン" /><input type="reset" value="クリア" /></div>
+        <div>
+            初めてシステムをご利用になる場合は、
+            まず
+            @Html.ActionLink("システム利用登録", "CsAddInput", "Customer", null, null)をしていただく必要があります。
+        </div>
+    }
+    </article>
+</body>
+</html>
