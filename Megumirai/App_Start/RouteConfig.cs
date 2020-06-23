@@ -16,7 +16,7 @@ namespace Megumirai
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
-                defaults: new { controller = "Order", action = "OrderList" }
+                defaults: new { controller = "Login", action = "EmpLoginIndex" }
             );
         }
     }
