@@ -174,12 +174,22 @@ namespace Megumirai.Controllers
         }
         public ActionResult OrderSearchResult(OrderMix model, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo, string status)
         {
+            var n = model.CustomerId; var m =model.OrderId; var l=deliveryFrom; var o=deliveryTo; var p =orderFrom; var q= orderTo; var r =status;
+            var z = (n, m, l,o,p,q,r);
+           
+            Session["Search"] = z;
+
+            ViewBag.customerId = model.CustomerId;
+            ViewBag.orderNo = model.OrderId;
+            ViewBag.deliveryFrom = deliveryFrom;
+            ViewBag.deliveryTo = deliveryTo;
+            ViewBag.orderFrom = orderFrom;
+            ViewBag.orderTo = orderTo;
+            ViewBag.status = status;
 
             using (var db = new Database1Entities1())
             {
-
-
-                var x = db.OrderMixes
+              var x = db.OrderMixes
                    .WhereIf(model.OrderId != 0, e => e.OrderId >= model.OrderId)
                    .WhereIf(model.CustomerId != 0, e => e.CustomerId >= model.CustomerId)
                    .WhereIf(deliveryTo != null, e => e.DeliveryDate <= deliveryTo)
@@ -193,9 +203,9 @@ namespace Megumirai.Controllers
                     .ToList();
 
                 var u = (from e in x
-                             select e).Count();
+                         select e).Count();
 
-                if (u ==0 ) 
+                if (u == 0)
                 {
                     ViewBag.Message = "入力された条件に適合する受注情報は存在しません。";
                     return View("OrderSearch");
@@ -203,20 +213,8 @@ namespace Megumirai.Controllers
 
                 //検索条件を結果に渡す。                                                                    
 
-                ViewBag.customerId = model.CustomerId;
-                ViewBag.orderNo = model.OrderId;
-                ViewBag.deliveryFrom = deliveryFrom;
-                ViewBag.deliveryTo = deliveryTo;
-                ViewBag.orderFrom = orderFrom;
-                ViewBag.orderTo = orderTo;
-                ViewBag.status = status;
-
-
-                Session["Search"] = x;
-
-
+                
                 return View(x);
-
             }
         }
         public ActionResult OrderUpdateInput(OrderMix om)
@@ -266,7 +264,7 @@ namespace Megumirai.Controllers
         {
             var u = Session["Search"];
 
-            return View("OrderSearchResult", u);
+            return RedirectToAction("OrderSearchResult", u);
         }
     }
     public static class LinqExtentions
