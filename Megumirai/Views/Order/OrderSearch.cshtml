@@ -1,5 +1,7 @@
 ﻿@model Megumirai.Models.OrderMix
-
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 <title>OrderSearch</title>
@@ -14,9 +16,9 @@
         @Html.ValidationSummary()
         @using (@Html.BeginForm("OrderSearchResult", "Order", FormMethod.Post))
         {
-        <div>
-            顧客ID <input id="model.CoustomerId" name="model.CustomerId" type="text" value="0"><br>
-        </div>
+            <div>
+                顧客ID <input id="model.CoustomerId" name="model.CustomerId" type="text" value="0"><br>
+            </div>
             <div>
                 ご注文番号<input id="model.OrderId" name="model.OrderId" type="text" value="0">
             </div>

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "OrderUpdateInput";
 }
+@{Layout = "~/Views/Shared/_Layout2.cshtml"; }
 <center>
     <h2>受注ステータス変更</h2>
     <br>
@@ -54,7 +55,7 @@
         @Html.HiddenFor(model => model.OrderMixId)
         <div><input type="submit" value="更新"></div>
         <br>
-        @Html.ActionLink("検索結果画面に戻る","SearchBack","Order")
+        @Html.ActionLink("検索結果画面に戻る", "SearchBack", "Order")
     }
 </center>
 
