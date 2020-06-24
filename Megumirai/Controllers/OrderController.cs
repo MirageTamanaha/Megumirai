@@ -22,7 +22,7 @@ namespace Megumirai.Controllers
             int tax = 0;
             int totalPrice = 0;
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var carts = db.Carts.ToList();
                 foreach (var i in carts)
@@ -91,7 +91,7 @@ namespace Megumirai.Controllers
         public ActionResult OrderConfirm()
         {
             var salmons = new List<ConfirmViewModel>();
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 //注文番号
                 var order = db.Orders.ToList();
@@ -131,7 +131,7 @@ namespace Megumirai.Controllers
 
         public ActionResult OrderCancelCheck(int orderid)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 ViewBag.OrderId = orderid;
                 var ItemList = db.OrderMixes.ToList();
@@ -150,7 +150,7 @@ namespace Megumirai.Controllers
 
         public ActionResult OrderCancel(int orderid)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ItemList = db.OrderMixes.ToList();
                 var dlist = new List<OrderMixViewModel>();
@@ -175,7 +175,7 @@ namespace Megumirai.Controllers
         public ActionResult OrderSearchResult(OrderMix model, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo, string status)
         {
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
 
 
@@ -221,7 +221,7 @@ namespace Megumirai.Controllers
         }
         public ActionResult OrderUpdateInput(OrderMix om)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var p = db.OrderMixes.Find(om.OrderMixId);
                 Session["Update"] = p;
@@ -230,7 +230,7 @@ namespace Megumirai.Controllers
         }
         public ActionResult OrderUpdateX(OrderMix model, string status)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var p = db.OrderMixes.Find(model.OrderMixId);
                 var q = db.Items.Find(p.ItemId);
