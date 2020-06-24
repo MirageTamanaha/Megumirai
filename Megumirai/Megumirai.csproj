@@ -140,12 +140,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\ConfirmViewModel.cs" />
     <Compile Include="Models\CsLoginModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpLoginModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -176,7 +180,6 @@
     <Compile Include="Models\OrderMix.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmpLoginModel.cs" />
     <Compile Include="Models\OrderMixViewModel.cs" />
     <Compile Include="Models\Stock.cs">
       <DependentUpon>Model1.tt</DependentUpon>

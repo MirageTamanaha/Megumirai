@@ -11,11 +11,12 @@ namespace Megumirai.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+        [AllowAnonymous]
         public ActionResult CsAddInput()
         {
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult CsAddCheck(Customer customer)
         {
             var u = new Customer
@@ -33,10 +34,10 @@ namespace Megumirai.Controllers
             ViewBag.Customer = Session["customer"];
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult CsAdd(Customer customer)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Customer)Session["customer"];
                 db.Customers.Add(u);
@@ -49,7 +50,7 @@ namespace Megumirai.Controllers
 
         public ActionResult CsList()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var CustomerList = db.Customers.ToList();
                 return View(CustomerList);
@@ -58,7 +59,7 @@ namespace Megumirai.Controllers
 
         public ActionResult CsUpdateInput(Customer customer)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Customers.Find(customer.CustomerId);
                 ViewBag.Model = u;
@@ -89,7 +90,7 @@ namespace Megumirai.Controllers
         {
             var u = (Customer)Session["updatecustomer"];
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ul = db.Customers.Find(u.CustomerId);
                 ul.CompanyName = u.CompanyName;
@@ -108,7 +109,7 @@ namespace Megumirai.Controllers
 
         public ActionResult CsDeleteCheck(Customer customer)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Customers.Find(customer.CustomerId);
                 var Cmodel3 = new Customer
@@ -130,7 +131,7 @@ namespace Megumirai.Controllers
         }
         public ActionResult CsDelete(Customer customer)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Customer)Session["deletecs"];
                 var I = db.Customers.Find(u.CustomerId);

@@ -13,7 +13,7 @@ namespace Megumirai.Controllers
         //商品追加画面の呼び出し
         public ActionResult CartInput(int Id)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var items = db.Items.Find(Id);
                 return View(items);
@@ -25,7 +25,7 @@ namespace Megumirai.Controllers
             int price = 0;
             price = item.UnitPrice * int.Parse(quantity);
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var cart = new Cart
                 {
@@ -50,7 +50,7 @@ namespace Megumirai.Controllers
             int tax = 0;
             int totalPrice = 0;
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var carts = db.Carts.ToList();
                 foreach (var i in carts)
@@ -68,7 +68,7 @@ namespace Megumirai.Controllers
         //見積商品の削除
         public ActionResult CartDelete(Cart cart)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Carts.Find(cart.CartId);
                 db.Carts.Remove(u);
@@ -80,7 +80,7 @@ namespace Megumirai.Controllers
         //見積商品の数量・希望納期の変更
         public ActionResult CartUpdate(Cart cart)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 db.SaveChanges();
                 return Redirect("CartCalc");
