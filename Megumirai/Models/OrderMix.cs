@@ -11,7 +11,7 @@ namespace Megumirai.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class OrderMix
     {
         public int OrderMixId { get; set; }
@@ -19,7 +19,7 @@ namespace Megumirai.Models
         public int OrderDetailId { get; set; }
         public int ItemId { get; set; }
         public string ItemName { get; set; }
-        public Nullable<int> UnitPrice { get; set; }
+        public int UnitPrice { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
         public System.DateTime DeliveryDate { get; set; }
@@ -29,23 +29,9 @@ namespace Megumirai.Models
         public int Tax { get; set; }
         public int TotalPrice { get; set; }
         public System.DateTime OrderDate { get; set; }
-
+    
         public virtual Customer Customer { get; set; }
+        public virtual Item Item { get; set; }
         public virtual Order Order { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("OrderMix[OrderMixId={0}, " +
-                 "OrderId={1}, " + "OrderDetailId={2}, " + "ItemId={3}", "ItemName={4}",
-                 "UnitPrice={5}," + "Quantity={6}," + "Price={7}," + "DeliveryDate={8}," + "Status={9},"
-                 + "CustomerId={10}," + "SubPrice={11}," + "Tax={12}," + "TotalPrice={13}," + "OrderDate={14}]",
-                 OrderMixId,OrderId,  OrderDetailId, ItemId, ItemName, UnitPrice,
-                 Quantity, Price, Status, CustomerId, Tax, TotalPrice, OrderDate);
-        }
-               
-
-     
-        }
     }
-
-
+}

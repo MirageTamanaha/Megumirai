@@ -17,7 +17,7 @@ namespace Megumirai.Controllers
         // GET: Item
         public ActionResult ItemCatalog()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ul = db.Items.ToList();
                 return View("ItemCatalog", ul);
@@ -26,7 +26,7 @@ namespace Megumirai.Controllers
 
         public ActionResult ItemList()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ItemList = db.Items.ToList();
                 return View(ItemList);
@@ -57,7 +57,7 @@ namespace Megumirai.Controllers
 
         public ActionResult ItemAdd(Item item)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Item)Session["additem"];
                 db.Items.Add(u);
@@ -69,7 +69,7 @@ namespace Megumirai.Controllers
 
         public ActionResult ItemUpdateInput(Item item)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(item.ItemId);
                 ViewBag.Model = u;
@@ -98,7 +98,7 @@ namespace Megumirai.Controllers
         {
             var u = (Item)Session["updateitem"];
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ul = db.Items.Find(u.ItemId);
                 ul.ItemName = u.ItemName;
@@ -115,7 +115,7 @@ namespace Megumirai.Controllers
 
         public ActionResult ItemDeleteCheck(Item item)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(item.ItemId);
                 var Imodel3 = new Item
@@ -135,7 +135,7 @@ namespace Megumirai.Controllers
         }
         public ActionResult ItemDelete(Item item)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Item)Session["deleteitem"];
                 var I = db.Items.Find(u.ItemId);

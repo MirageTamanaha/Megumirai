@@ -14,7 +14,7 @@ namespace Megumirai.Controllers
         // GET: Stock
         public ActionResult StockList()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var StockList = db.Items.ToList();
                 return View(StockList);
@@ -23,7 +23,7 @@ namespace Megumirai.Controllers
 
         public ActionResult StockUpdateInput(Item item)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(item.ItemId);
                 ViewBag.Model = u;
@@ -34,7 +34,7 @@ namespace Megumirai.Controllers
         public ActionResult StockUpdate(int up)
         {
             var I = (Item)Session["updateemployee"];
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(I.ItemId);
                 u.Stock = u.Stock + up;
@@ -45,7 +45,7 @@ namespace Megumirai.Controllers
         public ActionResult StockUpdateDown(int down)
         {
             var I = (Item)Session["updateemployee"];
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(I.ItemId);
                 u.Stock = u.Stock - down;
@@ -57,7 +57,7 @@ namespace Megumirai.Controllers
         public ActionResult StockUpdateDate(DateTime rdate)
         {
             var I = (Item)Session["updateemployee"];
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Items.Find(I.ItemId);
                 u.ReceiptDate = rdate;

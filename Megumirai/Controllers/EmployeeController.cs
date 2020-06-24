@@ -13,7 +13,7 @@ namespace Megumirai.Controllers
         // GET: Employee
         public ActionResult EmpList()
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var EmployeeList = db.Employees.ToList();
                 return View(EmployeeList);
@@ -40,7 +40,7 @@ namespace Megumirai.Controllers
 
         public ActionResult EmpAdd(Employee employee)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Employee)Session["addemployee"];
                 db.Employees.Add(u);
@@ -52,7 +52,7 @@ namespace Megumirai.Controllers
 
         public ActionResult EmpUpdateInput(Employee employee)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Employees.Find(employee.EmployeeId);
                 ViewBag.Model = u;
@@ -77,7 +77,7 @@ namespace Megumirai.Controllers
         {
             var u = (Employee)Session["updateemployee"];
 
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var ul = db.Employees.Find(u.EmployeeId);
                 ul.EmployeeName = u.EmployeeName;
@@ -90,7 +90,7 @@ namespace Megumirai.Controllers
 
         public ActionResult EmpDeleteCheck(Employee employee)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = db.Employees.Find(employee.EmployeeId);
                 var Emodel3 = new Employee
@@ -106,7 +106,7 @@ namespace Megumirai.Controllers
         }
         public ActionResult EmpDelete(Employee employee)
         {
-            using (var db = new Database1Entities())
+            using (var db = new Database1Entities1())
             {
                 var u = (Employee)Session["deleteemp"];
                 var I = db.Employees.Find(u.EmployeeId);
