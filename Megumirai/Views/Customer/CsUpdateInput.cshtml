@@ -1,7 +1,58 @@
-﻿
-@{
-    ViewBag.Title = "CsUpdate";
+﻿@{
+    ViewBag.Title = "CsUpdateInput";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>CsUpdate</h2>
-
+<center>
+    <h2>商品情報メンテナンス</h2>
+    <div>
+        商品情報を更新します。<br>
+        更新内容を入力して、「送信」ボタンを押してください。
+    </div>
+    <br>
+    <form action="/Customer/CsUpdateCheck" method="post">
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <td>@ViewBag.Model.CustomerId<input type="hidden" name="customerid" value="@ViewBag.Model.CustomerId" /></td>
+            </tr>
+            <tr>
+                <th>会社名</th>
+                <td><input type="text" name="companyname" value="@ViewBag.Model.CompanyName" required /></td>
+            </tr>
+            <tr>
+                <th>住所</th>
+                <td><input type="text" name="adress" value="@ViewBag.Model.Adress" required /></td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td><input type="text" name="telno" value="@ViewBag.Model.TelNo" required /></td>
+            </tr>
+            <tr>
+                <th>氏名(漢字)</th>
+                <td><input type="text" name="customername" value="@ViewBag.Model.CustomerName" required /></td>
+            </tr>
+            <tr>
+                <th>氏名(かな)</th>
+                <td><input type="text" name="customerkana" value="@ViewBag.Model.CustomerKana" required /></td>
+            </tr>
+            <tr>
+                <th>部署</th>
+                <td><input type="text" name="dept" value="@ViewBag.Model.Dept" required /></td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td><input type="text" name="email" value="@ViewBag.Model.Email" required /></td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td><input type="password" name="password" value="@ViewBag.Model.Password" required /></td>
+            </tr>
+            <tr>
+                <th>パスワード(確認)</th>
+                <td><input type="password" name="password" value="@ViewBag.Model.Password" required /></td>
+            </tr>
+        </table>
+        <input type="submit" value="送信" /><button type="button" onclick="location.href=`CsList`">戻る</button>
+    </form>
+</center>

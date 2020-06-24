@@ -1,7 +1,60 @@
-﻿
-@{
-    ViewBag.Title = "CsResult";
+﻿@{
+    ViewBag.Title = "CsAddCheck";
 }
 
-<h2>CsResult</h2>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+@Html.ValidationSummary()
+
+<div>
+    送信内容をご確認ください。<br />
+    よろしければ、「登録」ボタンを押してください。
+</div>
+<br>
+
+@using (Html.BeginForm("CsAdd", "Customer", FormMethod.Post))
+{
+    <table border="1">
+        <tr>
+            <th colspan="2">会社情報</th>
+        </tr>
+        <tr>
+            <th rowspan="3"></th>
+            <th>会社名</th>
+            <td>@ViewBag.Customer.CompanyName</td>
+        </tr>
+        <tr>
+            <th>住所</th>
+            <td>@ViewBag.Customer.Adress</td>
+        </tr>
+        <tr>
+            <th>電話番号</th>
+            <td>@ViewBag.Customer.TelNo</td>
+        </tr>
+        <tr>
+            <th colspan="2">ご担当者様情報</th>
+        </tr>
+        <tr>
+            <th rowspan="4"></th>
+            <th>氏名(漢字)</th>
+            <td>@ViewBag.Customer.CustomerName</td>
+        </tr>
+        <tr>
+            <th>氏名(かな)</th>
+            <td>@ViewBag.Customer.CustomerKana</td>
+        </tr>
+        <tr>
+            <th>部署</th>
+            <td>@ViewBag.Customer.Dept</td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td>@ViewBag.Customer.Email</td>
+        </tr>
+    </table>
+
+    <input type="submit" value="登録">
+    <button onclick="history.back()">戻る</button>
+}
 

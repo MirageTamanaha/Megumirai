@@ -1,7 +1,31 @@
 ﻿
 @{
     ViewBag.Title = "EmpUpdateCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpUpdateCheck</h2>
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <div>
+        以下の内容で担当者情報を更新します。<br>
+        更新内容を確認の上、「更新」ボタンを押してください。
+    </div>
+    <br>
+
+    <form action="/Employee/EmpUpdate" method="post">
+        <table border="1">
+            <tr>
+                <th>社員番号</th>
+                <td>@String.Format("{0:D4}", ViewBag.Emodel2.EmployeeId)</td>
+            </tr>
+            <tr>
+                <th>社員氏名</th>
+                <td>@ViewBag.Emodel2.EmployeeName</td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="更新" /><button type="button" onclick="location.href=`EmpList`">戻る</button>
+    </form>
+</center>
+
 

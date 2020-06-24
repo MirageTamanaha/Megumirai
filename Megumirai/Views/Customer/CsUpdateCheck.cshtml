@@ -1,7 +1,52 @@
 ﻿
 @{
     ViewBag.Title = "CsUpdateCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>CsUpdateCheck</h2>
+<center>
+    <h2>顧客情報メンテナンス</h2>
+    <div>
+        以下の内容で顧客情報を更新します。<br>
+        更新内容を確認の上、「更新」ボタンを押してください。
+    </div>
+    <br>
 
+    <form action="/Customer/CsUpdate" method="post">
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <td>@String.Format("{0:D4}", ViewBag.Cmodel2.CustomerId)</td>
+            </tr>
+            <tr>
+                <th>会社名</th>
+                <td>@ViewBag.Cmodel2.CompanyName</td>
+            </tr>
+            <tr>
+                <th>住所</th>
+                <td>@ViewBag.Cmodel2.Adress</td>
+            </tr>
+            <tr>
+                <th>電話番号</th>
+                <td>@ViewBag.Cmodel2.TelNo</td>
+            </tr>
+            <tr>
+                <th>氏名（漢字）</th>
+                <td>@ViewBag.Cmodel2.CustomerName</td>
+            </tr>
+            <tr>
+                <th>氏名（かな）</th>
+                <td>@ViewBag.Cmodel2.CustomerKana</td>
+            </tr>
+            <tr>
+                <th>部署</th>
+                <td>@ViewBag.Cmodel2.Dept</td>
+            </tr>
+            <tr>
+                <th>メールアドレス</th>
+                <td>@ViewBag.Cmodel2.Email</td>
+            </tr>
+        </table>
+        <input type="submit" value="更新" /><button type="button" onclick="location.href=`CsUpdateInput`">戻る</button><input type="reset" value="クリア" />
+    </form>
+</center>

@@ -1,7 +1,35 @@
 ﻿
+
 @{
-    ViewBag.Title = "CsDelete";
+    ViewBag.Title = "CsDeleteCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>CsDelete</h2>
-
+<center>
+    <h2>顧客情報メンテナンス</h2>
+    <p>
+        下記の顧客情報を削除します。<br>
+        内容を確認の上、「削除」ボタンを押してください。<br>
+    </p>
+    <form action="/Customer/CsDelete" method="post">
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <td>@String.Format("{0:D6}", ViewBag.Cmodel3.CustomerId)</td>
+            </tr>
+            <tr>
+                <th>会社名</th>
+                <td>@ViewBag.Cmodel3.CompanyName</td>
+            </tr>
+            <tr>
+                <th>顧客担当者部署</th>
+                <td>@ViewBag.Cmodel3.Dept</td>
+            </tr>
+            <tr>
+                <th>顧客担当者名</th>
+                <td>@ViewBag.Cmodel3.CustomerName</td>
+            </tr>
+        </table>
+        <input type="submit" value="削除" /><button type="button" onclick="location.href=`CsList`">戻る</button>
+    </form>
+</center>

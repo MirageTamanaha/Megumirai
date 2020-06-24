@@ -1,7 +1,74 @@
-﻿
+﻿@model List<Megumirai.Models.OrderMixViewModel>
 @{
     ViewBag.Title = "OrderConfirm";
+
 }
+<center>
+    <h2>ご注文ステータス確認</h2>
+    <div>
+        現在ご注文いただいている商品のステータスは以下のとおりです。<br>
+        発送済みでないご注文については、キャンセルが可能です。<br>
+    </div>
+    <br>
+    @foreach (var i in ViewBag.order)
+    {
+        using (Html.BeginForm("OrderCancelCheck", "Order", FormMethod.Post))
+        {
+            <div>
+                ご注文番号：@String.Format("{0:D6}", i.OrderId)
+                @foreach (var l in ViewBag.Button)
+                {
+                    if (l.No == i.OrderId)
+                    {
+                        if (l.Check == 0)
+                        {
+                            <input type="hidden" name="orderid" value="@i.OrderId">
+                            <input type="submit" value="この注文をキャンセルする">
+                        }
+                    }
+                }
+            </div>
+        }
+        <br>
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>希望納期</th>
+                <th>ステータス</th>
+            </tr>
 
-<h2>OrderConfirm</h2>
-
+            @for (int n = 0; n < Model.Count(); n++)
+            {
+                if (i.OrderId == Model[n].OrderId)
+                {
+                    <tr>
+                        <td>@String.Format("{0:D4}", Model[n].ItemId)</td>
+                        <td>@Model[n].ItemName</td>
+                        <td>@Model[n].Quantity</td>
+                        <td>@String.Format("{0:yyyy/MM/dd}", Model[n].DeliveryDate)</td>
+                        @if (Model[n].Status == "未出荷")
+                        {
+                            <td>未発送</td>
+                        }
+                        else if (Model[n].Status == "出荷済")
+                        {
+                            <td>発送済</td>
+                        }
+                        else if (Model[n].Status == "キャンセル")
+                        {
+                            <td>キャンセル</td>
+                        }
+                        else
+                        {
+                            <td>入荷待ち</td>
+                        }
+                    </tr>
+                }
+            }
+        </table>
+        <br>
+        <hr color="#EEEEEE">
+    }
+</center>

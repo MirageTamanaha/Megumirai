@@ -1,7 +1,48 @@
-﻿
+﻿@model Megumirai.Models.Customer
 @{
-    ViewBag.Title = "CsIndex";
+    ViewBag.Title = "CsAddInput";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<div>
+    システム利用登録を行います。<br />
+    下記の情報を入力して、送信ボタンを押してください。<br />
+</div>
+@Html.ValidationSummary()
+@using (Html.BeginForm("CsAddCheck", "Customer", FormMethod.Post))
+{
+    <div>
+        会社情報<br />
+        @Html.ValidationMessageFor(model => model.CompanyName)<br />
+        会社名  @Html.TextBoxFor(model => model.CompanyName)<br />
+        @Html.ValidationMessageFor(model => model.Adress)<br />
+        住所  @Html.TextBoxFor(model => model.Adress)<br />
+        @Html.ValidationMessageFor(model => model.TelNo)<br />
+        電話番号  @Html.TextBoxFor(model => model.TelNo)<br />
+    </div>
+    <div>
+        ご担当者様情報<br />
+        @Html.ValidationMessageFor(model => model.CustomerName)<br />
+        氏名（漢字） @Html.TextBoxFor(model => model.CustomerName)<br />
+        @Html.ValidationMessageFor(model => model.CustomerKana)<br />
+        氏名（かな） @Html.TextBoxFor(model => model.CustomerKana)<br />
+        @Html.ValidationMessageFor(model => model.Dept)<br />
+        部署  @Html.TextBoxFor(model => model.Dept)<br />
+        @Html.ValidationMessageFor(model => model.Email)<br />
+        メールアドレス  @Html.TextBoxFor(model => model.Email)<br />
+    </div>
+    <div>
+        認証用情報<br />
+        @Html.ValidationMessageFor(model => model.Password)<br />
+        パスワード  @Html.PasswordFor(model => model.Password)<br />
+        @Html.ValidationMessageFor(model => model.Password)<br />
+        パスワード（確認)  @Html.PasswordFor(model => model.Password)<br />
+    </div>
+
+    <input type="submit" value="送信">
+    <input type="reset" value="クリア" />
+    <br />
 }
 
-<h2>CsIndex</h2>
 

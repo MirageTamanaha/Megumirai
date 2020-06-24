@@ -1,7 +1,65 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ItemAddInput";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>ItemAddInput</h2>
+<h2>商品情報メンテナンス</h2>
+<d>
+    商品情報を新規登録します。<br>
+    登録内容を入力して、「送信」ボタンを押してください。<br>
+</d>
 
+<center>
+    <form action="/Item/ItemAddCheck" method="post">
+        <table border="1">
+            <tr>
+                <th><p>商品番号</p></th>
+                <td><input name="itemid" required /></td>
+            </tr>
+            <tr>
+                <th><p>商品名</p></th>
+                <td><input name="itemname" required /></td>
+            </tr>
+            <tr>
+                <th><p>商品画像(URL)</p></th>
+                <td><input name="itemurl" required /></td>
+            </tr>
+            <tr>
+                <th><p>単価</p></th>
+                <td><input name="unitprice" required /></td>
+            </tr>
+            <tr>
+                <th><p>寸法</p></th>
+                <td><input name="size" required /></td>
+            </tr>
+            <tr>
+                <th><p>種別</p></th>
+                <td>
+                    <select name="assortment">
+                        <option value="イチゴ">イチゴ</option>
+                        <option value="リンゴ">リンゴ</option>
+                        <option value="ブドウ">ブドウ</option>
+                        <option value="マンゴー">マンゴー</option>
+                        <option value="モモ">モモ</option>
+                        <option value="メロン">メロン</option>
+                        <option value="パッションフルーツ">パッションフルーツ</option>
+                        <option value="ドラゴンフルーツ">ドラゴンフルーツ</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><p>カテゴリー</p></th>
+                <td>
+                    <select name="category">
+                        <option value="単品">単品</option>
+                        <option value="贈答品">贈答品</option>
+                        <option value="加工品">加工品</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="送信" /><button type="button" onclick="location.href=`ItemList`">戻る</button>
+    </form>
+</center>

@@ -7,56 +7,84 @@ using Megumirai.Models;
 
 namespace Megumirai.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
-        // GET: Cart
- public ActionResult CartInput()
+        //商品追加画面の呼び出し
+        public ActionResult CartInput(int Id)
         {
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
-                var items = db.Items.Find(1);
+                var items = db.Items.Find(Id);
                 return View(items);
             }
         }
-
+        //入力された数量・希望納期と一緒に商品をカートに入れる
         public ActionResult CartCheck(Item item, string quantity, string date)
         {
-            Cart cart = new Cart
+            int price = 0;
+            price = item.UnitPrice * int.Parse(quantity);
+
+            using (var db = new Database1Entities())
             {
-                Itemid = String.Format("{0:D4}", item.ItemId),
-                Itemname = item.ItemName,
-                Itemphoto = item.ItemPhoto,
-                Unitprice = String.Format("{0:C}-", item.UnitPrice),
-                Quantity = int.Parse(quantity),
-                Deliverydate = date
-            };
-            Session["cart"] = cart;
-            GetSessionValue();
+                var cart = new Cart
+                {
+                    ItemId = item.ItemId,
+                    ItemName = item.ItemName,
+                    ItemPhoto = item.ItemPhoto,
+                    UnitPrice = item.UnitPrice,
+                    Quantity = int.Parse(quantity),
+                    DeliveryDate = date,
+                    Price = price
+                };
+                db.Carts.Add(cart);
+                db.SaveChanges();
+                ViewBag.Cart = cart;
+            }
             return View();
         }
-
+        //見積確認の表示
         public ActionResult CartCalc(Cart cart)
-
         {
-            return View();
+            int subPrice = 0;
+            int tax = 0;
+            int totalPrice = 0;
+
+            using (var db = new Database1Entities())
+            {
+                var carts = db.Carts.ToList();
+                foreach (var i in carts)
+                {
+                    subPrice += i.Price;
+                }
+                tax = (int)Math.Truncate(subPrice * 0.08);
+                totalPrice = subPrice + tax;
+                ViewBag.SubPrice = String.Format("{0:C}-", subPrice);
+                ViewBag.Tax = String.Format("{0:C}-", tax);
+                ViewBag.TotalPrice = String.Format("{0:C}-", totalPrice);
+                return View(carts);
+            }
+        }
+        //見積商品の削除
+        public ActionResult CartDelete(Cart cart)
+        {
+            using (var db = new Database1Entities())
+            {
+                var u = db.Carts.Find(cart.CartId);
+                db.Carts.Remove(u);
+                db.SaveChanges();
+                return RedirectToAction("CartCalc");
+            }
         }
 
-        public class Cart
+        //見積商品の数量・希望納期の変更
+        public ActionResult CartUpdate(Cart cart)
         {
-            public string Itemid { get; set; }
-            public string Itemname { get; set; }
-            public string Itemphoto { get; set; }
-            public string Unitprice { get; set; }
-            public int Quantity { get; set; }
-            public string Deliverydate { get; set; }
+            using (var db = new Database1Entities())
+            {
+                db.SaveChanges();
+                return Redirect("CartCalc");
+            }
         }
-
-        private void GetSessionValue()
-        {
-            //セッション状態の値を取得します。
-            object cart = Session["cart"];
-            ViewBag.Cart = cart;
-        }
-
     }
 }

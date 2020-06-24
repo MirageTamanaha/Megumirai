@@ -1,7 +1,42 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Customer>
 @{
     ViewBag.Title = "CsList";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>CsList</h2>
+<center>
+    <h3>顧客情報メンテナンス</h3>
+    <d>
+        顧客情報のメンテナンスを行います。<br>
+        登録済み顧客の情報を変更するには、会社名のリンクをクリックしてください。<br>
+        顧客情報を削除する場合は、リストの右にある「削除」ボタンを押してください。<br><br>
+    </d>
+    <div>
+        <table border="1">
+            <tr>
+                <th>顧客ID</th>
+                <th>会社名</th>
+                <th>顧客担当者部署</th>
+                <th>顧客担当者名</th>
+                <th>削除</th>
+            </tr>
+
+            @foreach (var vm in Model)
+            {
+                <tr>
+                    <td>@String.Format("{0:D4}", vm.CustomerId)</td>
+                    <td>@Html.ActionLink(vm.CompanyName, "CsUpdateInput", new { vm.CustomerId })</td>
+                    <td>@Html.DisplayFor(model => vm.Dept)</td>
+                    <td>@Html.DisplayFor(model => vm.CustomerName)</td>
+                    <td>
+                        @using (Html.BeginForm("CsDeleteCheck", "Customer", new { vm.CustomerId }, FormMethod.Post))
+                        {
+                            <input type="submit" value="削除" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</center>
 

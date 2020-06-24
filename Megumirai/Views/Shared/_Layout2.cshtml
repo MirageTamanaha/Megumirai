@@ -16,7 +16,7 @@
                     <div class="navbar navbar-inverse navbar-fixed-top">
                         <div class="container">
                             <div class="navbar-header">
-                                @Html.ActionLink("Colorfulverger 商品発注システム", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                                @Html.ActionLink("Colorfulverger 受発注管理システム", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                             </div>
                         </div>
                     </div>
@@ -32,10 +32,12 @@
                     <hr color="#EEEEEE">
                     <div class="navbar-collapse collapse">
                         <ul>
-                            <li>@Html.ActionLink("カタログを見る", "ItemCatalog", "Item")</li>
-                            <li>@Html.ActionLink("見積確認", "CartCalc", "Cart")</li>
-                            <li>@Html.ActionLink("発注ステータス確認", "OrderConfirm", "Order")</li>
-                            <li>@Html.ActionLink("ログアウト", "CsLogout", "Login")</li>
+                            <li>@Html.ActionLink("受注情報検索", "Order", "OrderSearch")</li>
+                            <li>@Html.ActionLink("在庫情報メンテナンス", "StockList", "Stock")</li>
+                            <li>@Html.ActionLink("担当者情報メンテナンス", "EmpList", "Employee")</li>
+                            <li>@Html.ActionLink("顧客情報メンテナンス", "CsList", "Customer")</li>
+                            <li>@Html.ActionLink("商品情報メンテナンス", "ItemList", "Item")</li>
+                            <li>@Html.ActionLink("ログアウト", "EmpLogout", "Login")</li>
                         </ul>
                     </div>
                 </nav>

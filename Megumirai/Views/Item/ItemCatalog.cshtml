@@ -1,7 +1,116 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Item>
 @{
     ViewBag.Title = "ItemCatalog";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
 
-<h2>ItemCatalog</h2>
+<center>
+    <div>
+        <h2>取扱商品カタログ</h2>
+    </div>
 
+    <h3>単品</h3>
+    <h4>新鮮な果物を1種類ずつ販売しています</h4>
+    @foreach (var ul in Model)
+    {
+        if (ul.Category.Contains("単品"))
+        {
+            <table border="1">
+                <tr style="text-align:center">
+                    <td><img src="@Html.DisplayFor(model => ul.ItemPhoto) " width="300" height="200" /></td>
+                    <td width="150" height="200">
+                        <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
+                        <p>@Html.DisplayFor(model => ul.ItemName)</p>
+                        <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
+                        寸法：@ul.Size<br />
+                        種別：@ul.Assortment<br />
+                        在庫数量：
+                        @if (ul.Stock != 0)
+                        {
+                            @Html.DisplayFor(model => ul.Stock)<br />
+                            using (Html.BeginForm("CartInput", "Cart", new { Id = ul.ItemId }, FormMethod.Post))
+                            {
+                                <input type="submit" value="注文する" />
+                            }
+                        }
+                        else
+                        {
+                            <b>入荷待ち</b>
+                        }
+
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+    <br>
+    <h3>贈答品</h3>
+    <h4>お祝い、御礼にどうぞ</h4>
+    @foreach (var ul in Model)
+    {
+
+        if (ul.Category.Contains("贈答品"))
+        {
+
+            <table border="1">
+                <tr style="text-align:center">
+                    <td><img src="@Html.DisplayFor(model => ul.ItemPhoto) " width="300" height="200" /></td>
+                    <td width="150" height="200">
+                        <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
+                        <p>@Html.DisplayFor(model => ul.ItemName)</p>
+                        <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
+                        寸法：@ul.Size<br />
+                        種別：@ul.Assortment<br />
+                        在庫数量：@if (ul.Stock != 0)
+                        {
+                            @Html.DisplayFor(model => ul.Stock)<br />
+                            using (Html.BeginForm("CartInput", "Cart", new { Id = ul.ItemId }, FormMethod.Post))
+                            {
+                                <input type="submit" value="注文する" />
+                            }
+                        }
+                        else
+                        {
+                            <b>入荷待ち</b>
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+    <br>
+    <h3>加工品</h3>
+    <h4>規格外の果物をおいしい加工品にしました</h4>
+    @foreach (var ul in Model)
+    {
+        if (ul.Category.Contains("加工品"))
+        {
+
+            <table border="1">
+                <tr style="text-align:center">
+                    <td><img src="@Html.DisplayFor(model => ul.ItemPhoto) " width="300" height="200" /></td>
+                    <td width="150" height="200">
+                        <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
+                        <p>@Html.DisplayFor(model => ul.ItemName)</p>
+                        <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
+                        寸法：@ul.Size<br />
+                        種別：@ul.Assortment<br />
+                        在庫数量：@if (ul.Stock != 0)
+                        {
+                            @Html.DisplayFor(model => ul.Stock)<br />
+                            using (Html.BeginForm("CartInput", "Cart", new { Id = ul.ItemId }, FormMethod.Post))
+                            {
+                                <input type="submit" value="注文する" />
+                            }
+                        }
+                        else
+                        {
+                            <b>入荷待ち</b>
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+</center>
