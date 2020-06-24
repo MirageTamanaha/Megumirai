@@ -1,7 +1,27 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EmpDeleteCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpDeleteCheck</h2>
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <p>
+        下記の担当者情報を削除します。<br>
+        内容を確認の上、「削除」ボタンを押してください。<br>
+    </p>
+    <form action="/Employee/EmpDelete" method="post">
+        <table border="1">
+            <tr>
+                <th>担当者番号</th>
+                <th>担当者名</th>
+            </tr>
+            <tr>
+                <td>@String.Format("{0:D4}", ViewBag.Emodel3.EmployeeId)</td>
+                <td>@ViewBag.Emodel3.EmployeeName</td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="削除" /><button type="button" onclick="location.href=`EmpList`">戻る</button>
+    </form>
+</center>
 

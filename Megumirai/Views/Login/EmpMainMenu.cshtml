@@ -1,23 +1,10 @@
 ﻿
+@{
+    ViewBag.Title = "EmpMainMenu";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
 <center>
-<table border="1">
-    <tr>
-        <th colspan="2">受発注管理システム</th>
-    </tr>
-   <tr>
-       <th rowspan="1">メニュー</th><td>メニューを選択してください</td>
-   </tr>
-    <tr>
-        <th rowspan="2"> 
-            <ul>
-                <li>@Html.ActionLink("受注情報検索", "OrderSeachInput", "Order", null, null)</li>
-                <li>@Html.ActionLink("在庫情報メンテナンス", "", "Stock", null, null)</li>
-                <li>@Html.ActionLink("担当者情報メンテナンス", "OrderConfirm", "Employee", null, null)</li>
-                <li>@Html.ActionLink("顧客情報メンテナンス", "CartCalc", "Customer", null, null)</li>
-                <li>@Html.ActionLink("商品情報メンテナンス", "CartCalc", "Item", null, null)</li>
-                <li>@Html.ActionLink("ログアウト", "EmpLogout", "Login", null, null)</li>
-            </ul>
-        </th>
-    </tr>   
-    </table>
+    <div>メニューを選択してください</div>
 </center>
+

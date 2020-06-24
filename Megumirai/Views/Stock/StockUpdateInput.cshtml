@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "StockUpdate";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <div>
+        在庫情報を更新します。<br>
+        商品が入荷した場合は、入荷数量を入力して、「入荷」ボタンを押してください。<br>
+        在庫を減らしたい場合は、減少数量を入力して「減少」ボタンを押してください。<br>
+        入荷予定日を更新したい場合は、入荷予定日を入力して「更新」ボタンを押してください。<br>
+    </div>
+    <br>
+    <table border="1">
+        <tr>
+            <th>商品番号</th>
+            <td>@ViewBag.Model.ItemId<input type="hidden" name="itemid" value="@ViewBag.Model.ItemId" /></td>
+        </tr>
+        <tr>
+            <th>商品名</th>
+            <td>@ViewBag.Model.ItemName<input type="hidden" name="itemname" value="@ViewBag.Model.ItemName" /></td>
+        </tr>
+        <tr>
+            <th>数量</th>
+            <td>@ViewBag.Model.Stock<input type="hidden" name="stock" value="@ViewBag.Model.Stock" /></td>
+        </tr>
+        <tr>
+            <th>入荷予定日</th>
+            @if (ViewBag.Model.ReceiptDate == null)
+            {
+                <td>-</td>
+            }
+            else
+            {
+                <td>@ViewBag.Model.ReceiptDate</td>
+            }
+        </tr>
+    </table>
+    <br>
+    数量
+    <form action="/Stock/StockUpdate" 　method="post">
+        <input type="text" name="up" />
+        <input type="submit" value="入荷">
+    </form>
+    <form action="/Stock/StockUpdateDown" 　method="post">
+        <input type="text" name="down" />
+        <input type="submit" value="減少">
+    </form>
+    入荷予定日
+    <form action="/Stock/StockUpdateDate" 　method="post">
+        <input type="text" name="rdate" />
+        <input type="submit" value="更新">
+    </form>
+    <br>
+    <button type="button" onclick="location.href=`StockList`">戻る</button>
+
+</center>

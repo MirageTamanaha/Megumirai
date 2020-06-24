@@ -1,7 +1,44 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Item>
 @{
     ViewBag.Title = "StockList";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>StockList</h2>
+<center>
+    <h2>在庫情報メンテナンス</h2>
 
+    <div>
+        在庫情報のメンテナンスを行います。<br>
+        変更したい在庫の商品名のリンクをクリックしてください。<br><br>
+    </div>
+
+    <body>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>商品番号</th>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>入荷予定日</th>
+                </tr>
+
+                @foreach (var vm in Model)
+                {
+                    <tr>
+                        <td>@String.Format("{0:D4}", vm.ItemId)</td>
+                        <td>@Html.ActionLink(vm.ItemName, "StockUpdateInput", new { vm.ItemId })</td>
+                        <td>@Html.DisplayFor(model => vm.Stock)</td>
+                        @if (vm.ReceiptDate == null)
+                        {
+                            <td>-</td>
+                        }
+                        else
+                        {
+                            <td>@Html.DisplayFor(model => vm.ReceiptDate)</td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </body>
+</center>

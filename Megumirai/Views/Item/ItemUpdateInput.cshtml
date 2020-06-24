@@ -1,7 +1,65 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ItemUpdateInput";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>ItemUpdateInput</h2>
-
+<center>
+    <h2>商品情報メンテナンス</h2>
+    <div>
+        商品情報を更新します。<br>
+        更新内容を入力して、「送信」ボタンを押してください。
+    </div>
+    <br>
+    <form action="/Item/ItemUpdateCheck" method="post">
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <td>@ViewBag.Model.ItemId<input type="hidden" name="itemid" value="@ViewBag.Model.ItemId" /></td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td><input type="text" name="itemname" value="@ViewBag.Model.ItemName" required /></td>
+            </tr>
+            <tr>
+                <th>商品画像(URL)</th>
+                <td><input type="text" name="itemurl" value="@ViewBag.Model.ItemPhoto" required /></td>
+            </tr>
+            <tr>
+                <th>単価</th>
+                <td><input type="text" name="unitprice" value="@ViewBag.Model.UnitPrice" required /></td>
+            </tr>
+            <tr>
+                <th>寸法</th>
+                <td><input type="text" name="size" value="@ViewBag.Model.Size" required /></td>
+            </tr>
+            <tr>
+                <th>種別</th>
+                <td>
+                    <select name="assortment">
+                        <option value="イチゴ">イチゴ</option>
+                        <option value="リンゴ">リンゴ</option>
+                        <option value="ブドウ">ブドウ</option>
+                        <option value="マンゴー">マンゴー</option>
+                        <option value="モモ">モモ</option>
+                        <option value="メロン">メロン</option>
+                        <option value="パッションフルーツ">パッションフルーツ</option>
+                        <option value="ドラゴンフルーツ">ドラゴンフルーツ</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th>
+                <td>
+                    <select name="category">
+                        <option value="単品">単品</option>
+                        <option value="贈答品">贈答品</option>
+                        <option value="加工品">加工品</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="送信" /><button type="button" onclick="location.href=`ItemList`">戻る</button>
+    </form>
+</center>

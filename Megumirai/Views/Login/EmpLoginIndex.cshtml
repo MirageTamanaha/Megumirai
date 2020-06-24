@@ -1,40 +1,38 @@
-﻿
-@model Megumirai.Models.EmpLoginModel
+﻿@model Megumirai.Models.EmpLoginModel
+
+@{
+    ViewBag.Title = "EmpLoginIndex";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
-<title>Login</title>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
-</head>
-<body>
-    <header>
-        <h2>ログイン</h2>
-    </header>
-    <article>
-        @Html.ValidationSummary()
-        @using (@Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div>
-                @Html.ValidationMessageFor(model => model.EmployeeId)<br>
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-            <table border="1">
-                <tr>
-                    <th>社員番号</th>
-                    <td> @Html.TextBoxFor(model => model.EmployeeId)</td>
-                </tr>
-                <tr>
-                    <th>パスワード</th>
-                    <td>@Html.PasswordFor(model => model.Password)</td>
-                </tr>
-                    </table>
-            <div><input type="submit" value="ログイン" /><input type="reset" value="クリア" /></div>
-        }
-      
-    </article>
-</body>
-</html>
+
+<center>
+    <div>社員番号とパスワードを入力してください。</div>
+    @Html.ValidationSummary()
+    @using (@Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationMessageFor(model => model.EmployeeId)<br>
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        <table border="1">
+            <tr>
+                <th>社員番号</th>
+                <td> @Html.TextBoxFor(model => model.EmployeeId)</td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>@Html.PasswordFor(model => model.Password)</td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <input type="submit" value="ログイン" /><input type="reset" value="クリア" />
+        </div>
+    }
+</center>
+
 

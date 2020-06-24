@@ -1,7 +1,29 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EmpAddCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpAddCheck</h2>
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <div>
+        以下の内容で担当者情報を登録します。<br>
+        登録内容を確認の上、「登録」ボタンを押してください。
+    </div>
+    <br>
 
+    <form action="/Employee/EmpAdd" method="post">
+        <table border="1">
+            <tr>
+                <th>担当者番号</th>
+                <td>@String.Format("{0:D4}", ViewBag.Emodel1.EmployeeId)</td>
+            </tr>
+            <tr>
+                <th>社員氏名</th>
+                <td>@ViewBag.Emodel1.EmployeeName</td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="登録" />
+        <button type="button" onclick="location.href=`EmpList`">戻る</button>
+    </form>
+</center>
