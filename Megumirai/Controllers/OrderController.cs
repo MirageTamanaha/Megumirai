@@ -168,8 +168,6 @@ namespace Megumirai.Controllers
             return Redirect("OrderConfirm");
         }
 
-        // GET: Order
-        [Authorize]
         public ActionResult OrderSearch()
         {
             return View();
@@ -179,6 +177,7 @@ namespace Megumirai.Controllers
 
             using (var db = new Database1Entities())
             {
+
 
                 var x = db.OrderMixes
                    .WhereIf(model.OrderId != 0, e => e.OrderId >= model.OrderId)
@@ -192,6 +191,15 @@ namespace Megumirai.Controllers
                    .WhereIf(status == "キャンセル", e => e.Status == "キャンセル")
                    .WhereIf(status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
                     .ToList();
+
+                var u = (from e in x
+                             select e).Count();
+
+                if (u ==0 ) 
+                {
+                    ViewBag.Message = "入力された条件に適合する受注情報は存在しません。";
+                    return View("OrderSearch");
+                }
 
                 //検索条件を結果に渡す。                                                                    
 
