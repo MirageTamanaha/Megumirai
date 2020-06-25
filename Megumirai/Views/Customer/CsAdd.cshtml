@@ -1,18 +1,22 @@
 ﻿@{
     ViewBag.Title = "CsAdd";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+
 }
 
-<br>
-<div>
-    システム利用登録を完了しました。<br />
-    お客様の顧客IDは、@String.Format("{0:D6}", ViewBag.id)です。
-</div>
-<br>
-<div>
-    ログイン時には、顧客IDとパスワードが必要となりますので、<br />
-    顧客IDを忘れないようにご注意ください。
-</div>
-<br>
-<br>
-<button onclick="location.href='/Login/CsLoginIndex'">ログイン画面を表示</button>
+
+<center>
+    <div>
+        システム利用登録を完了しました。<br />
+        お客様の顧客IDは、@String.Format("{0:D6}", ViewBag.id)です。
+    </div>
+    <br>
+    <div>
+        ログイン時には、顧客IDとパスワードが必要となりますので、<br />
+        顧客IDを忘れないようにご注意ください。
+    </div>
+    <br>
+    <br>
+    <button onclick="location.href='/Login/CsLoginIndex'">ログイン画面を表示</button>
+</center>
 
