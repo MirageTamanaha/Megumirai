@@ -23,7 +23,7 @@
                         <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
                         <p>@Html.DisplayFor(model => ul.ItemName)</p>
                         <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
-                        寸法：@ul.Size<br />
+                        寸法：@ul.Size <b>cm</b> <br />
                         種別：@ul.Assortment<br />
                         在庫数量：
                         @if (ul.Stock != 0)
@@ -40,6 +40,7 @@
                         }
 
                     </td>
+
                 </tr>
             </table>
         }
@@ -60,7 +61,7 @@
                         <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
                         <p>@Html.DisplayFor(model => ul.ItemName)</p>
                         <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
-                        寸法：@ul.Size<br />
+                        寸法：@ul.Size <b>cm</b> <br />
                         種別：@ul.Assortment<br />
                         在庫数量：@if (ul.Stock != 0)
                         {
@@ -94,7 +95,7 @@
                         <p>商品番号:@String.Format("{0:D4}", ul.ItemId)</p>
                         <p>@Html.DisplayFor(model => ul.ItemName)</p>
                         <p>ご提供価格：@String.Format("{0:C}", ul.UnitPrice)</p>
-                        寸法：@ul.Size<br />
+                        寸法：@ul.Size <b>cm</b> <br />
                         種別：@ul.Assortment<br />
                         在庫数量：@if (ul.Stock != 0)
                         {
@@ -114,3 +115,4 @@
         }
     }
 </center>
+
