@@ -10,9 +10,10 @@
         下記の商品を買い物かごに追加します。<br>
         数量と希望納期を入力してください。
     </div>
-    <img src="@Model.ItemPhoto">
-
-
+    <br>
+    @ViewBag.message
+    <br>
+    <img src="@Model.ItemPhoto" />
     @using (Html.BeginForm("CartCheck", "Cart", FormMethod.Post))
     {
         <table border="1">
@@ -27,8 +28,8 @@
                 <td>@String.Format("{0:D4}", Model.ItemId)</td>
                 <td>@Model.ItemName</td>
                 <td>@String.Format("{0:C}-", Model.UnitPrice)</td>
-                <td><input type="text" name="quantity"></td>
-                <td><input type="text" name="date"></td>
+                <td><input type="number" name="quantity" required title="数量は半角数字で入力してください"></td>
+                <td><input type="text" name="date" required pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" title="納期はyyyy/mm/ddで入力してください"></td>
             </tr>
         </table>
         <br>

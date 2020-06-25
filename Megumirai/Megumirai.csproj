@@ -272,7 +272,7 @@
     <Content Include="Views\Login\EmpMainMenu.cshtml" />
     <Content Include="Views\Order\OrderAdd.cshtml" />
     <Content Include="Views\Order\OrderConfirm.cshtml" />
-    <Content Include="Views\Order\OrderCancel.cshtml" />
+    <Content Include="Views\Order\OrderCancelCheck.cshtml" />
     <Content Include="Views\Order\OrderSearch.cshtml" />
     <Content Include="Views\Order\OrderSearchResult.cshtml" />
     <Content Include="Views\Order\OrderUpdateInput.cshtml" />
