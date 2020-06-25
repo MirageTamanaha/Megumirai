@@ -13,33 +13,51 @@ namespace Megumirai.Controllers
         //商品追加画面の呼び出し
         public ActionResult CartInput(int Id)
         {
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
                 var items = db.Items.Find(Id);
+                Session["cart"] = items;
                 return View(items);
             }
         }
         //入力された数量・希望納期と一緒に商品をカートに入れる
-        public ActionResult CartCheck(Item item, string quantity, string date)
+        public ActionResult CartCheck(Item item, int quantity, string date)
         {
             int price = 0;
-            price = item.UnitPrice * int.Parse(quantity);
+            price = item.UnitPrice * quantity;
 
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
+                var u = db.Items.Find(item.ItemId);
                 var cart = new Cart
                 {
                     ItemId = item.ItemId,
                     ItemName = item.ItemName,
                     ItemPhoto = item.ItemPhoto,
                     UnitPrice = item.UnitPrice,
-                    Quantity = int.Parse(quantity),
+                    Quantity = quantity,
                     DeliveryDate = date,
                     Price = price
                 };
-                db.Carts.Add(cart);
-                db.SaveChanges();
-                ViewBag.Cart = cart;
+
+                if (quantity <= 0)
+                {
+                    var i = (Item)Session["cart"];
+                    ViewBag.message = "数量は0より大きい値を入力してください。";
+                    return View("CartInput", i);
+                }
+                else if (quantity > u.Stock)
+                {
+                    var i = (Item)Session["cart"];
+                    ViewBag.message = "在庫数より多い数量を指定することはできません。";
+                    return View("CartInput", i);
+                }
+                else if (quantity <= u.Stock)
+                {
+                    db.Carts.Add(cart);
+                    db.SaveChanges();
+                    ViewBag.Cart = cart;
+                }
             }
             return View();
         }
@@ -50,7 +68,7 @@ namespace Megumirai.Controllers
             int tax = 0;
             int totalPrice = 0;
 
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
                 var carts = db.Carts.ToList();
                 foreach (var i in carts)
@@ -68,7 +86,7 @@ namespace Megumirai.Controllers
         //見積商品の削除
         public ActionResult CartDelete(Cart cart)
         {
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
                 var u = db.Carts.Find(cart.CartId);
                 db.Carts.Remove(u);
@@ -80,7 +98,7 @@ namespace Megumirai.Controllers
         //見積商品の数量・希望納期の変更
         public ActionResult CartUpdate(Cart cart)
         {
-            using (var db = new Database1Entities1())
+            using (var db = new Database1Entities())
             {
                 db.SaveChanges();
                 return Redirect("CartCalc");
