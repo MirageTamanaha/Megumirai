@@ -172,48 +172,43 @@ namespace Megumirai.Controllers
         {
             return View();
         }
-        public ActionResult OrderSearchResult(OrderMix model, DateTime? deliveryFrom, DateTime? deliveryTo, DateTime? orderFrom, DateTime? orderTo, string status)
+        public ActionResult OrderSearchResult(OrderSearchModel model)
         {
-            var n = model.CustomerId; var m =model.OrderId; var l=deliveryFrom; var o=deliveryTo; var p =orderFrom; var q= orderTo; var r =status;
-            var z = (n, m, l,o,p,q,r);
+            var z = model;
            
             Session["Search"] = z;
 
-            ViewBag.customerId = model.CustomerId;
-            ViewBag.orderNo = model.OrderId;
-            ViewBag.deliveryFrom = deliveryFrom;
-            ViewBag.deliveryTo = deliveryTo;
-            ViewBag.orderFrom = orderFrom;
-            ViewBag.orderTo = orderTo;
-            ViewBag.status = status;
+            ViewBag.customerId = model.customerId;
+            ViewBag.orderNo = model.orderId;
+            ViewBag.deliveryFrom = model.deliveryFrom;
+            ViewBag.deliveryTo = model.deliveryTo;
+            ViewBag.orderFrom = model.orderFrom;
+            ViewBag.orderTo = model.orderTo;
+            ViewBag.status = model.status;
 
             using (var db = new Database1Entities1())
             {
               var x = db.OrderMixes
-                   .WhereIf(model.OrderId != 0, e => e.OrderId >= model.OrderId)
-                   .WhereIf(model.CustomerId != 0, e => e.CustomerId >= model.CustomerId)
-                   .WhereIf(deliveryTo != null, e => e.DeliveryDate <= deliveryTo)
-                   .WhereIf(deliveryTo != null, e => e.DeliveryDate <= deliveryTo)
-                   .WhereIf(orderFrom != null, e => e.OrderDate >= orderFrom)
-                   .WhereIf(orderFrom != null, e => e.OrderDate >= orderFrom)
-                   .WhereIf(status == "出荷済", e => e.Status == "出荷済")
-                   .WhereIf(status == "未出荷", e => e.Status == "未出荷")
-                   .WhereIf(status == "キャンセル", e => e.Status == "キャンセル")
-                   .WhereIf(status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
+                   .WhereIf(model.orderId != 0, e => e.OrderId >= model.orderId)
+                   .WhereIf(model.customerId != 0, e => e.CustomerId >= model.customerId)
+                   .WhereIf(model.deliveryTo != null, e => e.DeliveryDate <= model.deliveryTo)
+                   .WhereIf(model.deliveryFrom != null, e => e.DeliveryDate >= model.deliveryFrom)
+                   .WhereIf(model.orderFrom != null, e => e.OrderDate >= model.orderFrom)
+                   .WhereIf(model.orderTo!= null, e => e.OrderDate <= model.orderTo)
+                   .WhereIf(model.status == "出荷済", e => e.Status == "出荷済")
+                   .WhereIf(model.status == "未出荷", e => e.Status == "未出荷")
+                   .WhereIf(model.status == "キャンセル", e => e.Status == "キャンセル")
+                   .WhereIf(model.status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
                     .ToList();
 
-                var u = (from e in x
-                         select e).Count();
+                var u = (from e in x select e).Count();
 
                 if (u == 0)
                 {
                     ViewBag.Message = "入力された条件に適合する受注情報は存在しません。";
                     return View("OrderSearch");
                 }
-
-                //検索条件を結果に渡す。                                                                    
-
-                
+            
                 return View(x);
             }
         }
@@ -277,5 +272,15 @@ namespace Megumirai.Controllers
             else
                 return Source;
         }
+    }
+    public class OrderSearchModel
+    {
+        public int? orderId { get; set; }
+        public int? customerId { get; set; }
+        public string status { get; set; }
+        public DateTime? deliveryFrom { get; set; }
+        public DateTime? deliveryTo { get; set; }
+        public DateTime? orderFrom { get; set; }
+        public DateTime? orderTo { get; set; }
     }
 }
