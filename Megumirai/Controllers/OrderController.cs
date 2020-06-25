@@ -8,7 +8,8 @@ using System.Web.Mvc;
 using System.Linq.Expressions;
 using Microsoft.Ajax.Utilities;
 using System.Security.Cryptography.X509Certificates;
-
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 namespace Megumirai.Controllers
 {
     [Authorize]
@@ -175,6 +176,14 @@ namespace Megumirai.Controllers
         }
         public ActionResult OrderSearchResult(OrderSearchModel model)
         {
+            if (model.orderId==null) 
+            {
+                model.orderId = 0;
+            }
+            if (model.customerId==null) 
+            {
+                model.customerId = 0;
+            }
             var z = model;
            
             Session["Search"] = z;
@@ -187,32 +196,113 @@ namespace Megumirai.Controllers
             ViewBag.orderTo = model.orderTo;
             ViewBag.status = model.status;
 
-            using (var db = new Database1Entities1())
+            if (model.deliveryTo != null & model.deliveryFrom != null)
             {
-              var x = db.OrderMixes
-                   .WhereIf(model.orderId != 0, e => e.OrderId >= model.orderId)
-                   .WhereIf(model.customerId != 0, e => e.CustomerId >= model.customerId)
-                   .WhereIf(model.deliveryTo != null, e => e.DeliveryDate <= model.deliveryTo)
-                   .WhereIf(model.deliveryFrom != null, e => e.DeliveryDate >= model.deliveryFrom)
-                   .WhereIf(model.orderFrom != null, e => e.OrderDate >= model.orderFrom)
-                   .WhereIf(model.orderTo!= null, e => e.OrderDate <= model.orderTo)
-                   .WhereIf(model.status == "出荷済", e => e.Status == "出荷済")
-                   .WhereIf(model.status == "未出荷", e => e.Status == "未出荷")
-                   .WhereIf(model.status == "キャンセル", e => e.Status == "キャンセル")
-                   .WhereIf(model.status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
-                    .ToList();
-
-                var u = (from e in x select e).Count();
-
-                if (u == 0)
+                if (model.deliveryFrom <= model.deliveryTo)
                 {
-                    ViewBag.Message = "入力された条件に適合する受注情報は存在しません。";
+                    using (var db = new Database1Entities1())
+                    {
+                        var x = db.OrderMixes
+                             .WhereIf(model.orderId != 0, e => e.OrderId >= model.orderId)
+                             .WhereIf(model.customerId != 0, e => e.CustomerId >= model.customerId)
+                             .WhereIf(model.deliveryTo != null, e => e.DeliveryDate <= model.deliveryTo)
+                             .WhereIf(model.deliveryFrom != null, e => e.DeliveryDate >= model.deliveryFrom)
+                             .WhereIf(model.orderFrom != null, e => e.OrderDate >= model.orderFrom)
+                             .WhereIf(model.orderTo != null, e => e.OrderDate <= model.orderTo)
+                             .WhereIf(model.status == "出荷済", e => e.Status == "出荷済")
+                             .WhereIf(model.status == "未出荷", e => e.Status == "未出荷")
+                             .WhereIf(model.status == "キャンセル", e => e.Status == "キャンセル")
+                             .WhereIf(model.status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
+                              .ToList();
+
+                        var u = (from e in x select e).Count();
+
+                        if (u == 0)
+                        {
+                            ViewBag.Message1 = "入力された条件に適合する受注情報は存在しません。";
+                            return View("OrderSearch");
+                        }
+                        else
+                        {
+                            return View(x);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Message2 = "希望納期(From)は希望納期(To)と同じかそれよりも前の日付を指定してください。";
                     return View("OrderSearch");
                 }
-            
-                return View(x);
             }
-        }
+            if (model.orderTo != null & model.orderFrom != null)
+            {
+                if (model.orderFrom <= model.orderTo)
+                {
+                    using (var db = new Database1Entities1())
+                    {
+                        var x = db.OrderMixes
+                             .WhereIf(model.orderId != 0, e => e.OrderId >= model.orderId)
+                             .WhereIf(model.customerId != 0, e => e.CustomerId >= model.customerId)
+                             .WhereIf(model.deliveryTo != null, e => e.DeliveryDate <= model.deliveryTo)
+                             .WhereIf(model.deliveryFrom != null, e => e.DeliveryDate >= model.deliveryFrom)
+                             .WhereIf(model.orderFrom != null, e => e.OrderDate >= model.orderFrom)
+                             .WhereIf(model.orderTo != null, e => e.OrderDate <= model.orderTo)
+                             .WhereIf(model.status == "出荷済", e => e.Status == "出荷済")
+                             .WhereIf(model.status == "未出荷", e => e.Status == "未出荷")
+                             .WhereIf(model.status == "キャンセル", e => e.Status == "キャンセル")
+                             .WhereIf(model.status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
+                              .ToList();
+
+                        var u = (from e in x select e).Count();
+
+                        if (u == 0)
+                        {
+                            ViewBag.Message1 = "入力された条件に適合する受注情報は存在しません。";
+                            return View("OrderSearch");
+                        }
+                        else
+                        {
+                            return View(x);
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.Message1 = "受注日時(From)は受注日時(To)と同じかそれよりも前の日付を指定してください。";
+                    return View("OrderSearch");
+                }
+            }
+            else
+            {
+                using (var db = new Database1Entities1())
+                {
+                    var x = db.OrderMixes
+                         .WhereIf(model.orderId != 0, e => e.OrderId >= model.orderId)
+                         .WhereIf(model.customerId != 0, e => e.CustomerId >= model.customerId)
+                         .WhereIf(model.deliveryTo != null, e => e.DeliveryDate <= model.deliveryTo)
+                         .WhereIf(model.deliveryFrom != null, e => e.DeliveryDate >= model.deliveryFrom)
+                         .WhereIf(model.orderFrom != null, e => e.OrderDate >= model.orderFrom)
+                         .WhereIf(model.orderTo != null, e => e.OrderDate <= model.orderTo)
+                         .WhereIf(model.status == "出荷済", e => e.Status == "出荷済")
+                         .WhereIf(model.status == "未出荷", e => e.Status == "未出荷")
+                         .WhereIf(model.status == "キャンセル", e => e.Status == "キャンセル")
+                         .WhereIf(model.status == "全て", e => e.Status == "出荷済" | e.Status == "未出荷" | e.Status == "キャンセル")
+                          .ToList();
+
+                    var u = (from e in x select e).Count();
+
+                    if (u == 0)
+                    {
+                        ViewBag.Message1 = "入力された条件に適合する受注情報は存在しません。";
+                        return View("OrderSearch");
+                    }
+                    else
+                    {
+                        return View(x);
+                    }
+                }
+              }
+          }
         public ActionResult OrderUpdateInput(OrderMix om)
         {
             using (var db = new Database1Entities1())
@@ -276,12 +366,13 @@ namespace Megumirai.Controllers
     }
     public class OrderSearchModel
     {
+        
         public int? orderId { get; set; }
         public int? customerId { get; set; }
-        public string status { get; set; }
         public DateTime? deliveryFrom { get; set; }
         public DateTime? deliveryTo { get; set; }
         public DateTime? orderFrom { get; set; }
         public DateTime? orderTo { get; set; }
+        public string status { get; set; }
     }
 }
