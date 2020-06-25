@@ -24,7 +24,7 @@
             @foreach (var vm in Model)
             {
                 <tr>
-                    <td>@String.Format("{0:D4}", vm.CustomerId)</td>
+                    <td>@String.Format("{0:D6}", vm.CustomerId)</td>
                     <td>@Html.ActionLink(vm.CompanyName, "CsUpdateInput", new { vm.CustomerId })</td>
                     <td>@Html.DisplayFor(model => vm.Dept)</td>
                     <td>@Html.DisplayFor(model => vm.CustomerName)</td>

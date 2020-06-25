@@ -35,8 +35,9 @@
             }
             <tr>
         </table>
+        <br>
         <input type="hidden" name="orderid" value="@ViewBag.OrderId">
         <input type="submit" value="キャンセル">
-        <button onclick="history.back()">戻る</button>
     }
+    <input type="button" onclick="location.href=`/Order/OrderConfirm`" value="戻る">
 </center>

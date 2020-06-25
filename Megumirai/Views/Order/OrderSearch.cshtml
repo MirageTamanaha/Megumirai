@@ -11,37 +11,36 @@
     <h2>受注情報検索</h2>
     受注情報を検索します。<br>
     検索条件を入力して「検索」ボタンを押してください。<br>
-    @ViewBag.Message
-    <article>
-        @Html.ValidationSummary()
+    @ViewBag.Message1
+    @ViewBag.Message2
+   <article>
         @using (@Html.BeginForm("OrderSearchResult", "Order", FormMethod.Post))
         {
-            <div>
-                顧客ID <input name="model.CustomerId" type="text" value="0"><br>
-            </div>
-            <div>
-                ご注文番号<input name="model.OrderId" type="text" value="0">
-            </div>
-            <div>
-                希望納期<input  type="text" name="model.deliveryFrom">～<input  type="text" name="model.deliveryTo"><br>
-            </div>
-            <div>
-                受注日時<input type="text" name="model.orderFrom">～<input  type="text" name="model.orderTo"><br>
-            </div>
-            <div>
-                ステータス
-                <select name="model.status">
-                    <option value="全て">全て</option>
-                    <option value="出荷済">出荷済</option>
-                    <option value="未出荷">未出荷</option>
-                    <option value="キャンセル">キャンセル</option>
-                </select>
+       <div>
+           顧客ID <input name="model.CustomerId" type="text" ><br>@*顧客ID @Html.TextBoxFor(model => model.customerId)<br>*@
+       </div>
+       <div>
+           ご注文番号<input name="model.OrderId" type="text" /><br>  @*ご注文番号 @Html.TextBoxFor(model => model.orderId)<br>*@
+       </div>
+       <div>
+           希望納期<input type="text" name="model.deliveryFrom">～<input type="text" name="model.deliveryTo"><br> @*希望納期 @Html.TextBoxFor(model => model.deliveryFrom)～@Html.TextBoxFor(model => model.deliveryTo)<br>*@
+       </div>
+       <div>
+           受注日時<input type="text" name="model.orderFrom">～<input type="text" name="model.orderTo"><br> @*受注日時  @Html.TextBoxFor(model => model.orderFrom)～@Html.TextBoxFor(model => model.orderTo)<br>*@
+       </div>
+                <div>
+                    ステータス
+                    <select name="model.status">
+                        <option value="全て">全て</option>
+                        <option value="出荷済">出荷済</option>
+                        <option value="未出荷">未出荷</option>
+                        <option value="キャンセル">キャンセル</option>
+                    </select>
+                    <br>
+                </div>
+                <div><input type="submit" value="検索"></div>
+                }
 
-                <br>
-            </div>
-            <div><input type="submit" value="検索"></div>
-        }
-
-    </article>
+</article>
 
 </center>

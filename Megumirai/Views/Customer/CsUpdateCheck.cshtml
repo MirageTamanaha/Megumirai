@@ -16,37 +16,39 @@
         <table border="1">
             <tr>
                 <th>顧客ID</th>
-                <td>@String.Format("{0:D4}", ViewBag.Cmodel2.CustomerId)</td>
+                <th>@String.Format("{0:D6}", ViewBag.Cmodel2.CustomerId)</th>
             </tr>
+            <tr><th style="text-align:center" colspan="2">会社情報</th></tr>
             <tr>
                 <th>会社名</th>
-                <td>@ViewBag.Cmodel2.CompanyName</td>
+                <th>@ViewBag.Cmodel2.CompanyName</th>
             </tr>
             <tr>
                 <th>住所</th>
-                <td>@ViewBag.Cmodel2.Adress</td>
+                <th>@ViewBag.Cmodel2.Adress</th>
             </tr>
             <tr>
                 <th>電話番号</th>
-                <td>@ViewBag.Cmodel2.TelNo</td>
+                <th>@ViewBag.Cmodel2.TelNo</th>
             </tr>
+            <tr><th style="text-align:center" colspan="2">顧客担当者情報</th></tr>
             <tr>
                 <th>氏名（漢字）</th>
-                <td>@ViewBag.Cmodel2.CustomerName</td>
+                <th>@ViewBag.Cmodel2.CustomerName</th>
             </tr>
             <tr>
                 <th>氏名（かな）</th>
-                <td>@ViewBag.Cmodel2.CustomerKana</td>
+                <th>@ViewBag.Cmodel2.CustomerKana</th>
             </tr>
             <tr>
                 <th>部署</th>
-                <td>@ViewBag.Cmodel2.Dept</td>
+                <th>@ViewBag.Cmodel2.Dept</th>
             </tr>
             <tr>
                 <th>メールアドレス</th>
-                <td>@ViewBag.Cmodel2.Email</td>
+                <th>@ViewBag.Cmodel2.Email</th>
             </tr>
         </table>
-        <input type="submit" value="更新" /><button type="button" onclick="location.href=`CsUpdateInput`">戻る</button><input type="reset" value="クリア" />
+        <input type="submit" value="更新" /><button type="button" onclick="location.href=`CsList`">戻る</button>
     </form>
 </center>

@@ -17,8 +17,18 @@
         </div>
         <div>
             <p>顧客IDとパスワードを入力してください。</p>
-            <span>顧客ID：</span>@Html.TextBoxFor(model => model.CustomerId)<br>
-            <span>パスワード：</span>@Html.PasswordFor(model => model.Password)<br>
+
+            <table>
+                <tr>
+                    <th>顧客ID</th>
+                    <td>@Html.TextBoxFor(model => model.CustomerId)</td>
+                </tr>
+                <tr>
+                    <th>パスワード</th>
+                    <td>@Html.PasswordFor(model => model.Password)</td>
+                </tr>
+            </table>
+
         </div>
         <br>
         <div>
@@ -26,7 +36,11 @@
         </div>
     }
     <div>
+
+        初めてシステムをご利用になる方は、<br />まず
+
         初めてシステムをご利用になる場合は、まず
+
         @Html.ActionLink("システム利用登録", "CsAddInput", "Customer", null, null)をしていただく必要があります。
     </div>
 </center>
