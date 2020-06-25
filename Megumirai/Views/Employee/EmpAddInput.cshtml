@@ -1,7 +1,37 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "EmpAddInput";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpAddInput</h2>
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <div>
+        担当者情報を新規登録します。<br>
+        登録内容を入力して、「送信」ボタンを押してください。<br>
+    </div>
+    <br>
 
+    <form action="/Employee/EmpAddCheck" method="post">
+        <table border="1">
+            <tr>
+                <th>社員番号</th>
+                <td><input type="text" name="employeeid" required /></td>
+            </tr>
+            <tr>
+                <th><p>社員氏名</p></th>
+                <td><input type="text" name="employeename" required /></td>
+            </tr>
+            <tr>
+                <th><p>パスワード</p></th>
+                <td><input type="password" name="password" required /></td>
+            </tr>
+            <tr>
+                <th><p>パスワード(確認)</p></th>
+                <td><input type="password" name="repassword" required /></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="送信" />
+        <button onclick="history.back()">戻る</button>
+    </form>
+</center>

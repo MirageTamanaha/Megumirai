@@ -1,7 +1,61 @@
-﻿
+﻿@model Megumirai.Models.OrderMix
+
 @{
     ViewBag.Title = "OrderUpdateInput";
 }
+@{Layout = "~/Views/Shared/_Layout2.cshtml"; }
+<center>
+    <h2>受注ステータス変更</h2>
+    <br>
+    <div>
+        受注ステータスを変更してください。
+    </div>
+    <br>
+</center>
+<center>
+    @ViewBag.message
+    @Html.ValidationSummary()
+    @using (@Html.BeginForm("OrderUpdateX", "Order", FormMethod.Post))
+    {
+        <table border="1">
+            <tr>
+                <th>ご注文番号-明細</th>
+                <td>@String.Format("{0:D4}", Model.OrderId)- @String.Format("{0:D4}", Model.OrderDetailId)</td>
+            </tr>
+            <tr>
+                <th>商品番号</th>
+                <td>@Model.ItemId</td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td>@Model.ItemName</td>
+            </tr>
+            <tr>
+                <th>数量</th>
+                <td>@Model.Quantity</td>
+            </tr>
+            <tr>
+                <th>希望納期</th>
+                <td>@String.Format("{0:yyyy/MM/dd}", Model.DeliveryDate)</td>
+            </tr>
+            <tr>
+                <th>ステータス</th>
+                <td>
+                    <select name="status">
 
-<h2>OrderUpdateInput</h2>
+                        <option value="出荷済">出荷済</option>
+                        <option value="未出荷">未出荷</option>
+
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br>
+        @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model => model.OrderMixId)
+        <div><input type="submit" value="更新"></div>
+        <br>
+        @Html.ActionLink("検索結果画面に戻る", "SearchBack", "Order")
+    }
+</center>
 

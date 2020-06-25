@@ -1,0 +1,43 @@
+﻿@model List<Megumirai.Models.OrderMixViewModel>
+@{
+    ViewBag.Title = "OrderCancel";
+}
+
+<center>
+    <h2>ご注文のお取消し確認</h2>
+
+    <div>
+        以下のご注文のキャンセルを承ります。<br>
+        内容をご確認の上、よろしければ「キャンセル」ボタンを押してください。
+    </div>
+    <div>ご注文番号：@String.Format("{0:D6}", ViewBag.OrderId)</div>
+    @using (Html.BeginForm("OrderCancel", "Order", FormMethod.Post))
+    {
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <th>商品名</th>
+                <th>単価</th>
+                <th>数量</th>
+                <th>希望納期</th>
+                <th>金額</th>
+            </tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@String.Format("{0:D4}", Model[i].ItemId)</td>
+                    <td>@Model[i].ItemName</td>
+                    <td>@String.Format("{0:C}", Model[i].UnitPrice)-</td>
+                    <td>@Model[i].Quantity</td>
+                    <td>@String.Format("{0:yyyy/MM/dd}", Model[i].DeliveryDate)</td>
+                    <td>@String.Format("{0:C}", Model[i].Price)-</td>
+                </tr>
+            }
+            <tr>
+        </table>
+        <br>
+        <input type="hidden" name="orderid" value="@ViewBag.OrderId">
+        <input type="submit" value="キャンセル">
+    }
+    <input type="button" onclick="location.href=`/Order/OrderConfirm`" value="戻る">
+</center>

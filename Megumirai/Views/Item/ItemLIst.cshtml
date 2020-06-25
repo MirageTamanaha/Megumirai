@@ -1,7 +1,52 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Item>
+
 @{
-    ViewBag.Title = "ItemLIst";
+    ViewBag.Title = "ItemList";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>ItemLIst</h2>
+<center>
+    <h3>商品情報メンテナンス</h3>
+    <div>
+        商品情報のメンテナンスを行います。<br>
+        新規に取扱商品を追加する場合は、「商品追加」ボタンを押してください。<br>
+        登録済み商品の情報を変更するには、商品名のリンクをクリックしてください。<br>
+        商品を削除する場合は、リストの右にある「削除」ボタンを押してください。<br><br>
+    </div>
+    <br>
+    <body>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>商品番号</th>
+                    <th>商品名</th>
+                    <th>単価</th>
+                    <th>寸法</th>
+                    <th>種別</th>
+                    <th>カテゴリー</th>
+                    <th>削除</th>
+                </tr>
 
+                @foreach (var vm in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => vm.ItemId)</td>
+                        <td>@Html.ActionLink(vm.ItemName, "ItemUpdateInput", new { vm.ItemId })</td>
+                        <td>@String.Format("{0:C}", vm.UnitPrice)</td>
+                        <td>@Html.DisplayFor(model => vm.Size)</td>
+                        <td>@Html.DisplayFor(model => vm.Assortment)</td>
+                        <td>@Html.DisplayFor(model => vm.Category)</td>
+                        <td>
+                            @using (Html.BeginForm("ItemDeleteCheck", "Item", new { vm.ItemId }, FormMethod.Post))
+                            {
+                                <input type="submit" value="削除" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br>
+            <input type="button" onclick="location.href=`/Item/ItemAddInput`" value="商品追加">
+        </div>
+    </body>
+</center>

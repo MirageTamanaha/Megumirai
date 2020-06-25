@@ -1,7 +1,52 @@
-﻿
+﻿@model List<Megumirai.Models.OrderMixViewModel>
 @{
     ViewBag.Title = "OrderAdd";
 }
 
-<h2>OrderAdd</h2>
-
+<center>
+    <h2>注文完了</h2>
+    <div>
+        以下の内容でご注文を承りました。<br>
+        ご注文番号は、@String.Format("{0:D6}", ViewBag.Order.OrderId)です。<br>
+        <br>
+        ご注文番号は、お問い合わせの際に必要となることがありますので、<br>
+        メモをおとりになるか、印刷するなどして大切に保管してください<br>
+        <br>
+        お買い上げいただき、ありがとうございました。
+    </div>
+    <table border="1">
+        <tr>
+            <th>商品番号</th>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>数量</th>
+            <th>希望納期</th>
+            <th>金額</th>
+        </tr>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@String.Format("{0:D4}", Model[i].ItemId)</td>
+                <td>@Model[i].ItemName</td>
+                <td>@String.Format("{0:C}", Model[i].UnitPrice)-</td>
+                <td>@Model[i].Quantity</td>
+                <td>@String.Format("{0:yyyy/MM/dd}", Model[i].DeliveryDate)</td>
+                <td>@String.Format("{0:C}", Model[i].Price)-</td>
+            </tr>
+        }
+        <tr>
+            <th rowspan="3"></th>
+            <th colspan="4" align="right">小計</th>
+            <td>@String.Format("{0:C}", ViewBag.Order.SubPrice)-</td>
+            <th rowspan="3"></th>
+        </tr>
+        <tr>
+            <th colspan="4" align="right">消費税</th>
+            <td>@String.Format("{0:C}", ViewBag.Order.Tax)</td>
+        </tr>
+        <tr>
+            <th colspan="4" align="right">合計</th>
+            <td>@String.Format("{0:C}", ViewBag.Order.TotalPrice)</td>
+        </tr>
+    </table>
+</center>

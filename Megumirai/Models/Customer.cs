@@ -21,7 +21,6 @@ namespace Megumirai.Models
             this.Orders = new HashSet<Order>();
             this.OrderMixes = new HashSet<OrderMix>();
         }
-
         public int CustomerId { get; set; }
         [Required(ErrorMessage = "会社名を入力してください")]
         public string CompanyName { get; set; }

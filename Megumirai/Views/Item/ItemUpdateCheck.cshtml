@@ -1,7 +1,50 @@
 ﻿
 @{
     ViewBag.Title = "ItemUpdateCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>ItemUpdateCheck</h2>
+<center>
+    <h2>商品情報メンテナンス</h2>
+    <div>
+        以下の内容で商品情報を更新します。<br>
+        更新内容を確認の上、「更新」ボタンを押してください。
+    </div>
+    <br>
+
+    <form action="/Item/ItemUpdate" method="post">
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <td>@String.Format("{0:D4}", ViewBag.Imodel2.ItemId)</td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td>@ViewBag.Imodel2.ItemName</td>
+            </tr>
+            <tr>
+                <th>商品画像</th>
+                <td><img src="@ViewBag.Imodel2.ItemPhoto" /></td>
+            </tr>
+            <tr>
+                <th>単価</th>
+                <td>@String.Format("{0:C}", ViewBag.Imodel2.UnitPrice)</td>
+            </tr>
+            <tr>
+                <th>寸法</th>
+                <td>@ViewBag.Imodel2.Size</td>
+            </tr>
+            <tr>
+                <th>種別</th>
+                <td>@ViewBag.Imodel2.Assortment</td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th>
+                <td>@ViewBag.Imodel2.Category</td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="更新" /><button type="button" onclick="location.href=`ItemList`">戻る</button>
+    </form>
+</center>
 

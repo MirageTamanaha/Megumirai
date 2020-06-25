@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Megumirai.Models.OrderMix>
+    
+
+<h2>OrdrList</h2>
+
+
+
+@foreach (var res in Model)
+{
+    <tr>
+        <th>
+            @Html.ActionLink(res.OrderId + "-" + res.OrderDetailId,
+           "OrderUpdateInput", new { res.OrderMixId, controller = "Order" })
+        </th>
+        <th>@res.ItemId</th>
+        <th>@res.ItemName</th>
+        <th>@res.Quantity</th>
+        <th>@res.DeliveryDate</th>
+        <th>@res.Status</th>
+    </tr>
+}
+
+
+
+
+
+
+
+ 

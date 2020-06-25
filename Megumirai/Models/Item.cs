@@ -17,19 +17,20 @@ namespace Megumirai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.OrderMixes = new HashSet<OrderMix>();
         }
     
-        public decimal ItemId { get; set; }
+        public int ItemId { get; set; }
         public string ItemName { get; set; }
         public string ItemPhoto { get; set; }
         public string Category { get; set; }
         public int UnitPrice { get; set; }
         public string Size { get; set; }
         public string Assortment { get; set; }
+        public int Stock { get; set; }
+        public Nullable<System.DateTime> ReceiptDate { get; set; }
     
-        public virtual Stock Stock { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderMix> OrderMixes { get; set; }
     }
 }

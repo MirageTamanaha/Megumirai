@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Colofulverger</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th colspan="2">
+                <header>
+                    <div class="navbar navbar-inverse navbar-fixed-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                @Html.ActionLink("Colorfulverger 受発注管理システム", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <nav>
+                    <div style="text-align:center">
+                        メニュー
+                    </div>
+                    <hr color="#EEEEEE">
+                    <div class="navbar-collapse collapse">
+                        <ul>
+                            <li>@Html.ActionLink("受注情報検索", "OrderSearch", "Order")</li>
+                            <li>@Html.ActionLink("在庫情報メンテナンス", "StockList", "Stock")</li>
+                            <li>@Html.ActionLink("担当者情報メンテナンス", "EmpList", "Employee")</li>
+                            <li>@Html.ActionLink("顧客情報メンテナンス", "CsList", "Customer")</li>
+                            <li>@Html.ActionLink("商品情報メンテナンス", "ItemList", "Item")</li>
+                            <li>@Html.ActionLink("ログアウト", "EmpLogout", "Login")</li>
+                        </ul>
+                    </div>
+                </nav>
+            </td>
+            <td>
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - めぐみらい</p>
+                    </footer>
+                </div>
+            </td>
+        </tr>
+    </table>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

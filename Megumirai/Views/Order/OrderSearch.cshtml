@@ -1,7 +1,47 @@
-﻿
+﻿@model Megumirai.Controllers.OrderSearchModel
 @{
-    ViewBag.Title = "OrderSearch";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+<title>OrderSearch</title>
 
-<h2>OrderSearch</h2>
+<center>
 
+    <h2>受注情報検索</h2>
+    受注情報を検索します。<br>
+    検索条件を入力して「検索」ボタンを押してください。<br>
+    @ViewBag.Message
+    <article>
+        @Html.ValidationSummary()
+        @using (@Html.BeginForm("OrderSearchResult", "Order", FormMethod.Post))
+        {
+            <div>
+                顧客ID <input name="model.CustomerId" type="text" value="0"><br>
+            </div>
+            <div>
+                ご注文番号<input name="model.OrderId" type="text" value="0">
+            </div>
+            <div>
+                希望納期<input  type="text" name="model.deliveryFrom">～<input  type="text" name="model.deliveryTo"><br>
+            </div>
+            <div>
+                受注日時<input type="text" name="model.orderFrom">～<input  type="text" name="model.orderTo"><br>
+            </div>
+            <div>
+                ステータス
+                <select name="model.status">
+                    <option value="全て">全て</option>
+                    <option value="出荷済">出荷済</option>
+                    <option value="未出荷">未出荷</option>
+                    <option value="キャンセル">キャンセル</option>
+                </select>
+
+                <br>
+            </div>
+            <div><input type="submit" value="検索"></div>
+        }
+
+    </article>
+
+</center>

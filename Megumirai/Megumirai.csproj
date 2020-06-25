@@ -140,9 +140,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CartViewModel.cs" />
+    <Compile Include="Models\ConfirmViewModel.cs" />
+    <Compile Include="Models\CsLoginModel.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmpLoginModel.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -170,6 +177,10 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderMix.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderMixViewModel.cs" />
     <Compile Include="Models\Stock.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -190,8 +201,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -261,13 +272,17 @@
     <Content Include="Views\Login\EmpMainMenu.cshtml" />
     <Content Include="Views\Order\OrderAdd.cshtml" />
     <Content Include="Views\Order\OrderConfirm.cshtml" />
-    <Content Include="Views\Order\OrderCancel.cshtml" />
+    <Content Include="Views\Order\OrderCancelCheck.cshtml" />
     <Content Include="Views\Order\OrderSearch.cshtml" />
-    <Content Include="Views\Order\OrderSearchResut.cshtml" />
+    <Content Include="Views\Order\OrderSearchResult.cshtml" />
     <Content Include="Views\Order\OrderUpdateInput.cshtml" />
     <Content Include="Views\Order\OrderUpdate.cshtml" />
     <Content Include="Views\Stock\StockList.cshtml" />
-    <Content Include="Views\Stock\StockUpdate.cshtml" />
+    <Content Include="Views\Stock\StockUpdateInput.cshtml" />
+    <Content Include="Views\Order\OrderList.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\Shared\_Layout4.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

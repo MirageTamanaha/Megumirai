@@ -1,7 +1,74 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Cart>
+
 @{
     ViewBag.Title = "CartCalc";
 }
 
-<h2>CartCalc</h2>
+<center>
+    <h2>見積確認</h2>
 
+    <div>
+        買い物かごの中身からお見積内容を表示します。<br>
+        見積内容に間違いがなければ、「注文」ボタンを押してください。<br>
+        数量、希望納期を変更するには、値を入力して、「再見積」ボタンを押してください。<br>
+        商品を削除する場合は、リストの右にある「削除」ボタンを押してください。
+    </div>
+
+    <form>
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <th>商品名</th>
+                <th>単価</th>
+                <th>数量</th>
+                <th>希望納期</th>
+                <th>金額</th>
+                <th>削除</th>
+            </tr>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@String.Format("{0:D4}", i.ItemId)</td>
+                    <td>@i.ItemName</td>
+                    <td>@String.Format("{0:C}", i.UnitPrice)-</td>
+                    <td>
+                        <input type="number" name="quantity" value="@i.Quantity" required title="数量は半角数字で入力してください">
+                        @*@Html.TextBoxFor(model => i.Quantity)*@
+                    </td>
+                    <td>
+                        <input type="text" name="date" value="@i.DeliveryDate" required pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" title="納期はyyyy/mm/ddで入力してください">
+                        @*@Html.TextBoxFor(model => i.DeliveryDate)*@
+                    </td>
+                    <td>@String.Format("{0:C}", i.Price)-</td>
+                    <td>
+                        @using (Html.BeginForm("CartDelete", "Cart", new { i.CartId }, FormMethod.Post))
+                        {
+                            @Html.HiddenFor(model => i.CartId)
+                            <input type="submit" value="削除" />
+                        }
+                    </td>
+                </tr>
+            }
+            <tr align="left">
+                <th rowspan="3"></th>
+                <th colspan="4">小計</th>
+                <td>@ViewBag.SubPrice</td>
+                <th rowspan="3"></th>
+            </tr>
+            <tr align="left">
+                <th colspan="4">消費税</th>
+                <td>@ViewBag.Tax</td>
+            </tr>
+            <tr align="left">
+                <th colspan="4">合計</th>
+                <td>@ViewBag.TotalPrice</td>
+            </tr>
+        </table>
+        <input type="hidden" value="@ViewBag.SubPrice">
+        <input type="hidden" value="@ViewBag.Tax">
+        <input type="hidden" value="@ViewBag.TotalPrice">
+
+        <button type="submit" formaction="/Order/OrderAdd">注文</button>
+        <button type="submit" formaction="/Cart/CartUpdate">再見積</button>
+    </form>
+</center>

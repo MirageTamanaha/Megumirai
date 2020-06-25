@@ -1,7 +1,37 @@
 ﻿
 @{
     ViewBag.Title = "EmpUpdateInput";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpUpdateInput</h2>
+<center>
+    <h2>担当者情報メンテナンス</h2>
+    <div>
+        担当者情報を更新します。<br>
+        更新内容を入力して、「送信」ボタンを押してください。
+    </div>
+    <br>
+    <form action="/Employee/EmpUpdateCheck" method="post">
+        <table border="1">
+            <tr>
+                <th>社員番号</th>
+                <td>@ViewBag.Model.EmployeeId<input type="hidden" name="employeeid" value="@ViewBag.Model.EmployeeId" /></td>
+            </tr>
+            <tr>
+                <th>社員氏名</th>
+                <td><input type="text" name="employeename" value="@ViewBag.Model.EmployeeName" required /></td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td><input type="password" name="password" value="@ViewBag.Model.Password" required /></td>
+            </tr>
+            <tr>
+                <th>パスワード(確認)</th>
+                <td><input type="password" name="repassword" value="@ViewBag.Model.Password" required /></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="送信" /><button type="button" onclick="location.href=`EmpList`">戻る</button>
+    </form>
+</center>
 

@@ -1,7 +1,40 @@
-﻿
+﻿@model IEnumerable<Megumirai.Models.Employee>
 @{
     ViewBag.Title = "EmpList";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>EmpList</h2>
+<center>
+    <h3>担当者情報メンテナンス</h3>
+    <d>
+        担当者情報のメンテナンスを行います。<br>
+        新規に担当者を追加する場合は、「追加」ボタンを押してください。<br>
+        登録済み担当者の情報を変更するには、社員氏名のリンクをクリックしてください。<br>
+        担当者を削除する場合は、リストの右にある「削除」ボタンを押してください。<br><br>
+    </d>
+    <div>
+        <table border="1">
+            <tr>
+                <th>社員番号</th>
+                <th>担当者氏名</th>
+                <th>削除</th>
+            </tr>
 
+            @foreach (var vm in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => vm.EmployeeId)</td>
+                    <td>@Html.ActionLink(vm.EmployeeName, "EmpUpdateInput", new { vm.EmployeeId })</td>
+                    <td>
+                        @using (Html.BeginForm("EmpDeleteCheck", "Employee", new { vm.EmployeeId }, FormMethod.Post))
+                        {
+                            <input type="submit" value="削除" />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        <br>
+        <input type="button" onclick="location.href=`/Employee/EmpAddInput`" value="追加">
+    </div>
+</center>

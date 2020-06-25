@@ -1,7 +1,42 @@
-﻿
+﻿@model Megumirai.Models.OrderMix
 @{
     ViewBag.Title = "OrderUpdate";
 }
-
-<h2>OrderUpdate</h2>
-
+@{Layout = "~/Views/Shared/_Layout2.cshtml"; }
+<center>
+    <h2>受注ステータス変更完了</h2>
+    <br>
+    受注ステータスを更新しました。
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>ご注文番号-明細</th>
+            <td>@String.Format("{0:D4}", Model.OrderId)- @String.Format("{0:D4}", Model.OrderDetailId)</td>
+        </tr>
+        <tr>
+            <th>商品番号</th>
+            <td>@Model.ItemId</td>
+        </tr>
+        <tr>
+            <th>商品名</th>
+            <td>@Model.ItemName</td>
+        </tr>
+        <tr>
+            <th>数量</th>
+            <td>@Model.Quantity</td>
+        </tr>
+        <tr>
+            <th>希望納期</th>
+            <td>@String.Format("{0:yyyy/MM/dd}", Model.DeliveryDate)</td>
+        </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>
+                @Model.Status
+            </td>
+        </tr>
+    </table>
+    <br>
+    @Html.ActionLink("検索結果画面に戻る", "SearchBack", "Order")
+</center>

@@ -1,7 +1,47 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ItemDeleteCheck";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>ItemDeleteCheck</h2>
-
+<center>
+    <h2>商品情報メンテナンス</h2>
+    <p>
+        下記の商品情報を削除します。<br>
+        内容を確認の上、「削除」ボタンを押してください。<br>
+    </p>
+    <br>
+    <form action="/Item/ItemDelete" method="post">
+        <table border="1">
+            <tr>
+                <th>商品番号</th>
+                <td>@String.Format("{0:D4}", ViewBag.Imodel3.ItemId)</td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td>@ViewBag.Imodel3.ItemName</td>
+            </tr>
+            <tr>
+                <th>商品画像</th>
+                <td><img src="@ViewBag.Imodel3.ItemPhoto" /></td>
+            </tr>
+            <tr>
+                <th>単価</th>
+                <td>@String.Format("{0:C}", ViewBag.Imodel3.UnitPrice)</td>
+            </tr>
+            <tr>
+                <th>寸法</th>
+                <td>@ViewBag.Imodel3.Size</td>
+            </tr>
+            <tr>
+                <th>種別</th>
+                <td>@ViewBag.Imodel3.Assortment</td>
+            </tr>
+            <tr>
+                <th>カテゴリー</th>
+                <td>@ViewBag.Imodel3.Category</td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="削除" /><button type="button" onclick="location.href=`ItemList`">戻る</button>
+    </form>
+</center>
