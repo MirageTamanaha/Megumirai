@@ -130,7 +130,6 @@ namespace Megumirai.Controllers
                 return View(dlist);
             };
         }
-
         public ActionResult OrderCancelCheck(int orderid)
         {
             using (var db = new Database1Entities1())
@@ -149,7 +148,6 @@ namespace Megumirai.Controllers
                 return View(dlist);
             }
         }
-
         public ActionResult OrderCancel(int orderid)
         {
             using (var db = new Database1Entities1())
@@ -169,7 +167,6 @@ namespace Megumirai.Controllers
             }
             return Redirect("OrderConfirm");
         }
-
         public ActionResult OrderSearch()
         {
             return View();

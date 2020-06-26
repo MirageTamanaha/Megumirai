@@ -38,7 +38,7 @@ namespace Megumirai.Controllers
             return View();
         }
 
-        public ActionResult ItemAddCheck(int itemid, string itemname, string itemurl, int unitprice, string size, string assortment, string category, int stock)
+        public ActionResult ItemAddCheck(int itemid, string itemname, string itemurl, int unitprice, string size, string assortment, string category)
         {
             var Imodel1 = new Item
             {
